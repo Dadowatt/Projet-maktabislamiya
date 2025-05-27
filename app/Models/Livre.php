@@ -38,7 +38,7 @@ class Livre extends Model
     {
         return $this->hasMany(Favoris::class);
     }
-    public function note()
+    public function notes()
     {
         return $this->hasMany(Note::class);
     }

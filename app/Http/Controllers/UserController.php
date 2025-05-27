@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auteur;
+use App\Models\Livre;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function home()
 {
-    return view('user.home');
+    // return view('user.home');
+     $livres = Livre::with('auteur')->latest()->get();
+    $livresRecents = Livre::latest()->take(3)->get();
+    $topAuteurs = Auteur::take(3)->get();
+
+    return view('user.home', compact('livres', 'livresRecents', 'topAuteurs'));
 }
-public function livres() { return view('users.livres'); }
-    public function themes() { return view('users.themes'); }
-    public function auteurs() { return view('users.auteurs'); }
-    public function mesAuteurs() { return view('users.auteurs-suivi'); }
-    public function lectureList() { return view('users.lecture_list'); }
-    public function favoris() { return view('users.favoris'); }
-    public function profile() { return view('users.profil'); }
-    public function parametre() { return view('users.parametre'); }
-    public function detailLivre($id) { return view('users.detail_livre', compact('id')); }
+public function livres() { return view('user.livres'); }
+    public function themes() { return view('user.themes'); }
+    public function auteurs() { return view('user.auteurs'); }
+    public function mesAuteurs() { return view('user.auteurs-suivi'); }
+    public function lectureList() { return view('user.lecture_list'); }
+    public function favoris() { return view('user.favoris'); }
+    public function detailLivre($id) { return view('user.detail_livre', compact('id')); }
 }

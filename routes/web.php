@@ -2,9 +2,14 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuteurController;
+use App\Http\Controllers\AuteurUserController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\CategorieUserController;
+use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\LivreController;
+use App\Http\Controllers\LivreUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ThemeUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,11 +35,15 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')
 });
 
 // Utilisateur
-Route::middleware(['auth', 'is_user'])->prefix('user')->name('user')->group(function () {
+Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/home', [UserController::class, 'home'])->name('home');
-    Route::get('/livres', [UserController::class, 'livres'])->name('livres');
-    Route::get('/favoris', [UserController::class, 'favoris'])->name('favoris');
-    Route::get('/auteurs-suivi', [UserController::class, 'auteurs-suivi'])->name('auteurs-suivi');
+    Route::get('/livres', [LivreUserController::class, 'index'])->name('livres');
+    Route::get('/livres/{id}', [LivreUserController::class, 'show'])->name('livres.show');
+    Route::post('/livres/{id}/favoris', [FavorisController::class, 'store'])->name('livres.favoris');
+    Route::post('/livres/{id}/note', [LivreUserController::class, 'note'])->name('livres.note');
+    Route::get('/auteurs', [AuteurUserController::class, 'index'])->name('auteurs');
+    Route::get('/categories', [CategorieUserController::class, 'index'])->name('categories');
+    Route::get('/themes', [ThemeUserController::class, 'index'])->name('themes');
 });
 
 require __DIR__.'/auth.php';
