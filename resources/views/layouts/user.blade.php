@@ -72,7 +72,9 @@
                 <div class="list-group mb-3">
                     <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-list-check me-2"></i> Liste De Lecture</a>
                     <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-badge me-2"></i> Mes Auteurs</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris</a>
+                     <a href="{{ route('user.favoris.index') }}" class="list-group-item list-group-item-action">
+                     <i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris
+                     </a>
                 </div>
                 <h6 class="text-success fw-bold mb-3">Activité</h6>
                 <div class="list-group">
@@ -91,6 +93,19 @@
         <!-- Contenu dynamique central -->
         <div class="col-md-8 overflow-auto">
             <div class="container py-4 main-content-scroll">
+                @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+@if(session('info'))
+    <div class="alert alert-info">{{ session('info') }}</div>
+@endif
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <div>{{ $error }}</div>
+        @endforeach
+    </div>
+@endif
                 @yield('content')
             </div>
         </div>
@@ -117,13 +132,19 @@
 
         <h6 class="fw-bold text-success mt-4">Top Auteurs</h6>
         <div class="d-flex mb-2">
-            @foreach($topAuteurs as $auteur)
-                <div class="text-center me-2">
-                    <img src="{{ $auteur->photo ? asset('storage/'.$auteur->photo) : asset('default-avatar.png') }}" class="rounded-circle border border-success mb-1" style="width: 48px; height: 48px; object-fit: cover;" alt="{{ $auteur->nom }}">
-                    <div style="font-size: 0.85rem;">{{ $auteur->nom }}</div>
-                </div>
-            @endforeach
+    @foreach($topAuteurs as $auteur)
+        <div class="text-center me-2">
+            <img src="{{ $auteur->photo ? asset('storage/'.$auteur->photo) : asset('default-avatar.png') }}"
+                 class="rounded-circle border border-success mb-1"
+                 style="width: 48px; height: 48px; object-fit: cover;"
+                 alt="{{ $auteur->nom }}">
+            <div style="font-size: 0.85rem;">
+                {{ $auteur->nom }}
+                <span class="bg-secondary small">{{ $auteur->followers_count }}</span>
+            </div>
         </div>
+    @endforeach
+</div>
     </div>
 </div>
     </div>

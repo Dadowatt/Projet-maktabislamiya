@@ -39,10 +39,12 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::get('/home', [UserController::class, 'home'])->name('home');
     Route::get('/livres', [LivreUserController::class, 'index'])->name('livres');
     Route::get('/livres/{id}', [LivreUserController::class, 'show'])->name('livres.show');
-    Route::post('/livres/{id}/favoris', [FavorisController::class, 'store'])->name('livres.favoris');
+    Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.index');
+    Route::post('livres/{id}/favoris', [FavorisController::class, 'store'])->name('livres.favoris');
     Route::post('/livres/{id}/note', [LivreUserController::class, 'note'])->name('livres.note');
     Route::get('/auteurs', [AuteurUserController::class, 'index'])->name('auteurs');
     Route::get('/categories', [CategorieUserController::class, 'index'])->name('categories');
+    Route::get('/categories/{id}', [CategorieUserController::class, 'show'])->name('categories.show');
     Route::get('/themes', [ThemeUserController::class, 'index'])->name('themes');
 });
 

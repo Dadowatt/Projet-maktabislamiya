@@ -1,7 +1,8 @@
 @extends('layouts.user')
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-4">
         <h3 class="text-success mb-0">Liste des livres</h3>
         <a href="{{ route('user.livres') }}" class="text-success" style="font-size:1rem;">voir tout <i class="bi bi-chevron-double-right"></i></a>
     </div>
@@ -28,4 +29,25 @@
     <div class="text-center">
         <a href="{{ route('user.livres') }}" class="btn btn-outline-success">Afficher plus</a>
     </div>
+    </section>
+    <section>
+        <div class="row g-4">
+          <div class="d-flex justify-content-between align-items-center mt-5">
+            <h5 class="text-success mb-2">Catégories des livres</h5>
+            <a href="#" class="text-success">voir tout <i class="fas fa-angle-double-right"></i></a>
+          </div>
+          <div class="container text-center">
+            <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3 mt-3">
+              
+            @foreach ( $categories as $categorie )
+            <div class="col">
+                <div class="p-4 shadow">
+                    <a href="{{ route('user.categories.show', $categorie) }}">{{ $categorie->nom }}</a></div>
+              </div>
+            @endforeach
+             
+            </div>
+          </div>
+        </div>
+    </section>
 @endsection

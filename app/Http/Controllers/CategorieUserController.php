@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auteur;
+use App\Models\Categorie;
+use App\Models\Livre;
 use Illuminate\Http\Request;
 
 class CategorieUserController extends Controller
@@ -11,7 +14,8 @@ class CategorieUserController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Categorie::all();
+       return view('user.categories.index', compact('categories'));
     }
 
     /**
@@ -35,7 +39,11 @@ class CategorieUserController extends Controller
      */
     public function show(string $id)
     {
-        //
+    $categorie = Categorie::findOrFail($id);
+    $livres = $categorie->livres()->with('auteur')->get();
+    $livresRecents = Livre::latest()->take(3)->get();
+    $topAuteurs = Auteur::take(3)->get();
+    return view('user.categories.show', compact('categorie', 'livres', 'livresRecents', 'topAuteurs'));
     }
 
     /**
