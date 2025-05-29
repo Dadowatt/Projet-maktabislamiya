@@ -1,8 +1,8 @@
-@extends('layouts.user') {{-- Adapte si besoin --}}
+@extends('layouts.user')
 
 @section('content')
 <div class="container mt-4">
-    <h3>Mes Auteurs Suivis</h3>
+    <h3>Tous les Auteurs</h3>
     <div class="row">
         @forelse($auteurs as $auteur)
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
@@ -15,14 +15,15 @@
                                      style="width:100%; height:100%; object-fit:cover;">
                             </div>
                         </a>
-                        <div class="fw-bold mb-2">{{ $auteur->nom }}</div>
+                        <div class="fw-bold mb-1">{{ $auteur->nom }}</div>
+                        <p class="text-muted small mb-0">{{ $auteur->livres_count }} {{ Str::plural('livre', $auteur->livres_count) }}</p>
                         <p class="text-muted small">{{ $auteur->followers_count }} {{ Str::plural('abonné', $auteur->followers_count) }}</p>
                     </div>
                 </div>
             </div>
         @empty
             <div class="col-12">
-                <p>Vous ne suivez aucun auteur pour le moment.</p>
+                <p>Aucun auteur trouvé.</p>
             </div>
         @endforelse
     </div>

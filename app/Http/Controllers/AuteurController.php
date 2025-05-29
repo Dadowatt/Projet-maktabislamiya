@@ -52,7 +52,9 @@ class AuteurController extends Controller
      */
     public function show(Auteur $auteur)
     {
-        //
+    $auteur->loadCount('followers');
+    $livres = $auteur->livres;
+    return view('admin.auteurs.show', compact('auteur', 'livres'));
     }
 
     /**

@@ -12,10 +12,41 @@ class CategorieUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function themesChoisi()
+{
+    $livres = Livre::with(['auteur', 'categorie'])->latest()->get();
+    $livresRecents = Livre::latest()->take(3)->get();
+    $topAuteurs = Auteur::take(3)->get();
+    $auteurs = Auteur::withCount('followers')->get();
+    $user = auth()->user();
+    $categories = $user->categories()->with('livres.auteur')->get();
+    return view('user.themes.index', compact('categories', 'livres', 'auteurs', 'livresRecents', 'topAuteurs'));
+}
+
+public function choisirThemes(Request $request)
+{
+    $user = auth()->user();
+    $user->categories()->syncWithoutDetaching($request->categories);
+    return redirect()->route('user.themes')->with('success', 'Thèmes enregistrés avec succès');
+}
+
+public function retirerTheme(Categorie $categorie)
+{
+    $user = auth()->user();
+    $user->categories()->detach($categorie->id);
+
+    return redirect()->route('user.themes')->with('success', 'Thème retiré avec succès.');
+}
+
+
+     public function index()
     {
-        $categories = Categorie::all();
-       return view('user.categories.index', compact('categories'));
+    $livres = Livre::with('auteur')->latest()->get();
+    $livresRecents = Livre::latest()->take(3)->get();
+    $topAuteurs = Auteur::take(3)->get();
+    $auteurs = Auteur::withCount('followers')->get();
+    $categories = Categorie::all();
+       return view('user.categories.index', compact('categories','livres', 'livresRecents', 'topAuteurs', 'auteurs'));
     }
 
     /**

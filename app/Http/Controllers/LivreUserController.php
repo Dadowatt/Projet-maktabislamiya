@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auteur;
+use App\Models\Categorie;
 use App\Models\Favoris;
 use App\Models\Livre;
 use App\Models\Note;
@@ -27,10 +28,14 @@ class LivreUserController extends Controller
     );
     return redirect()->route('user.livres.show', $livre->id)->with('success', 'Votre note a été enregistrée.');
 }
-
      public function index()
     {
-        //
+        $topAuteurs = Auteur::take(3)->get();
+        $auteurs = Auteur::withCount('followers')->get();
+        $categories = Categorie::all();
+        $livresRecents = Livre::latest()->take(3)->get();
+        $livres = Livre::with(['auteur', 'notes'])->get();
+        return view('user.livres.index', compact('livres', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
     }
 
     /**
@@ -66,12 +71,13 @@ class LivreUserController extends Controller
         $userNote = $livre->notes()->where('user_id', $user->id)->value('valeur');
         $estFavori = $user->favoris()->where('livre_id', $livre->id)->exists();
     }
-
+    $user = auth()->user();
+    $categories = $user->categories()->with('livres.auteur')->get();
     $livresRecents = Livre::latest()->take(3)->get();
     $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
 
     return view('user.livres.detail_livre', compact(
-        'livre', 'noteMoyenne', 'nbAvis', 'userNote', 'estFavori', 'livresRecents', 'topAuteurs'
+        'livre', 'noteMoyenne', 'nbAvis', 'userNote', 'estFavori', 'livresRecents', 'topAuteurs', 'categories'
     ));
         
     }

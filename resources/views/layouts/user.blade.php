@@ -37,6 +37,11 @@
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    @php
+    $adoration = \App\Models\Categorie::where('nom', 'Adoration')->first();
+    $apprentissage = \App\Models\Categorie::where('nom', 'Apprentissage')->first();
+    $comportement = \App\Models\Categorie::where('nom', 'Comportement')->first();
+@endphp
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="{{ route('user.home') }}">Maktaba.<span class="text-success">islam</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -45,14 +50,33 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-3">
                 <li class="nav-item"><a class="nav-link" href="{{ route('user.home') }}">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Adoration</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Apprentissage</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Comportement islamique</a></li>
+
+                @if($adoration)
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}">Adoration</a>
+</li>
+@endif
+                @if($apprentissage)
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}">Apprentissage</a>
+</li>
+@endif
+            @if($comportement)
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}">Comportement islamique</a>
+</li>
+@endif
             </ul>
-            <form class="d-flex ms-auto" action="#" method="GET">
-                <input class="form-control me-2" type="search" placeholder="Chercher par Titre, Auteur..." aria-label="Search">
-                <button class="btn btn-success" type="submit">Chercher</button>
-            </form>
+    <form class="d-flex ms-auto" action="{{ route('user.recherche') }}" method="GET">
+    <input class="form-control me-2" type="search" name="q" placeholder="Chercher..." aria-label="Search" required>
+    <select class="form-select me-2" name="type" style="width: auto;">
+        <option value="livre" selected>Livre</option>
+        <option value="auteur">Auteur</option>
+        <option value="categorie">Catégorie</option>
+    </select>
+    
+    <button class="btn btn-success" type="submit">Chercher</button>
+</form>
         </div>
     </div>
 </nav>
@@ -64,21 +88,19 @@
             <div class="list-group mb-3">
                 <h6 class="text-success fw-bold mb-2">Catégorie</h6>
                 <div class="list-group mb-3">
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person me-2"></i> Auteurs</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-journal-bookmark me-2"></i> Livres</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-tags me-2"></i> Catégories</a>
+                    <a href="{{ route('user.auteurs.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-person me-2"></i> Auteurs</a>
+                    <a href="{{ route('user.livres') }}" class="list-group-item list-group-item-action"><i class="bi bi-journal-bookmark me-2"></i> Livres</a>
+                    <a href="{{ route('user.categories.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-tags me-2"></i> Catégories</a>
                 </div>
                 <h6 class="text-success fw-bold mb-3">Bibliothèque</h6>
                 <div class="list-group mb-3">
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-list-check me-2"></i> Liste De Lecture</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-badge me-2"></i> Mes Auteurs</a>
-                     <a href="{{ route('user.favoris.index') }}" class="list-group-item list-group-item-action">
-                     <i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris
-                     </a>
+                    <a href="{{ route('user.lectures.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-list-check me-2"></i> Liste De Lecture</a>
+                    <a href="{{ route('user.auteurs.auteurs-suivi') }}" class="list-group-item list-group-item-action"><i class="bi bi-person-badge me-2"></i> Mes Auteurs</a>
+                     <a href="{{ route('user.favoris.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris</a>
                 </div>
                 <h6 class="text-success fw-bold mb-3">Activité</h6>
                 <div class="list-group">
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-bookmark-check me-2"></i> Thèmes choisi</a>
+                    <a href="{{ route('user.themes') }}" class="list-group-item list-group-item-action"><i class="bi bi-bookmark-check me-2"></i> Thèmes choisi</a>
                     <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-circle me-2"></i> Profil</a>
                     <a href="#" class="list-group-item list-group-item-action" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
@@ -123,7 +145,7 @@
                     <div class="col-8">
                         <div class="card-body py-2 px-2">
                             <h6 class="card-title mb-1" style="font-size: 0.95rem;">{{ $livre->titre }}</h6>
-                            <a href="{{ route('user.livres.show', $livre->id) }}" class="btn btn-success btn-sm py-0 px-2" style="font-size: 0.85rem;">Lecture</a>
+                            <a href="{{ route('user.livres.show', $livre->id) }}" class="btn btn-success btn-sm py-0 px-2" style="font-size: 0.85rem;">consulter</a>
                         </div>
                     </div>
                 </div>
@@ -134,10 +156,11 @@
         <div class="d-flex mb-2">
     @foreach($topAuteurs as $auteur)
         <div class="text-center me-2">
+            <a href="{{ route('user.auteurs.show', $auteur->id) }}">
             <img src="{{ $auteur->photo ? asset('storage/'.$auteur->photo) : asset('default-avatar.png') }}"
                  class="rounded-circle border border-success mb-1"
-                 style="width: 48px; height: 48px; object-fit: cover;"
-                 alt="{{ $auteur->nom }}">
+                 style="width: 55px; height: 55px; object-fit: cover;"
+                 alt="{{ $auteur->nom }}"></a>
             <div style="font-size: 0.85rem;">
                 {{ $auteur->nom }}
                 <span class="bg-secondary small">{{ $auteur->followers_count }}</span>
@@ -153,7 +176,6 @@
 <footer class="bg-dark text-light pt-4 text-center mt-4">
     <small>&copy; {{ date('Y') }} Maktaba.islam</small>
 </footer>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

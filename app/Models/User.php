@@ -24,35 +24,35 @@ class User extends Authenticatable
         'password',
         'role',
     ];
-    // Livres ajoutés en favoris
+
 public function favoris()
 {
     return $this->hasMany(Favoris::class);
 }
-
-// Livres notés par l'utilisateur
 public function notes()
 {
     return $this->hasMany(Note::class);
 }
-
-// Livres lus par l'utilisateur
 public function lectures()
 {
-    return $this->hasMany(Lecture::class);
+     return $this->belongsToMany(Livre::class, 'lectures')->withTimestamps();
 }
 
-// Commentaires écrits par l'utilisateur
 public function commentaire()
 {
     return $this->hasMany(Commentaire::class);
 }
 
-// Auteurs suivis par cet utilisateur
 public function auteurSuivis()
 {
     return $this->belongsToMany(Auteur::class, 'auteur_suivis', 'user_id', 'auteur_id');
 }
+
+public function categories()
+{
+    return $this->belongsToMany(Categorie::class, 'categorie_user'); 
+}
+
 
     /**
      * The attributes that should be hidden for serialization.

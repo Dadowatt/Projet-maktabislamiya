@@ -19,19 +19,19 @@ class Livre extends Model
     {
         return $this->belongsTo(Auteur::class);
     }
-    public function categorie()
-    {
-        return $this->belongsTo(Categorie::class);
-    }
+   public function categorie() {
+    return $this->belongsTo(Categorie::class);
+}
 
     public function commentaire()
     {
         return $this->hasMany(Commentaire::class);
     }
 
-    public function lecture()
+    public function lecteurs()
     {
-        return $this->hasMany(Lecture::class);
+        // return $this->hasMany(Lecture::class);
+        return $this->belongsToMany(User::class, 'lectures')->withTimestamps();
     }
 
     public function favoris()

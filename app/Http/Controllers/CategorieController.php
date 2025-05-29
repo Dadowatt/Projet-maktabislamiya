@@ -43,9 +43,11 @@ class CategorieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categorie $categorie)
+    public function show(Categorie $categorie, $id)
     {
-        //
+         $categorie = Categorie::with(['livres.auteur', 'livres.notes'])->findOrFail($id);
+
+    return view('user.categories.show', compact('categorie'));
     }
 
     /**

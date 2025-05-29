@@ -6,9 +6,11 @@ use App\Http\Controllers\AuteurUserController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CategorieUserController;
 use App\Http\Controllers\FavorisController;
+use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\LivreUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RechercheController;
 use App\Http\Controllers\ThemeUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -42,10 +44,20 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::get('/favoris', [FavorisController::class, 'index'])->name('favoris.index');
     Route::post('livres/{id}/favoris', [FavorisController::class, 'store'])->name('livres.favoris');
     Route::post('/livres/{id}/note', [LivreUserController::class, 'note'])->name('livres.note');
-    Route::get('/auteurs', [AuteurUserController::class, 'index'])->name('auteurs');
-    Route::get('/categories', [CategorieUserController::class, 'index'])->name('categories');
-    Route::get('/categories/{id}', [CategorieUserController::class, 'show'])->name('categories.show');
-    Route::get('/themes', [ThemeUserController::class, 'index'])->name('themes');
+    Route::get('/livres/{id}/lecture', [LectureController::class, 'lire'])->name('livres.lecture');
+    Route::get('/lectures', [LectureController::class, 'index'])->name('lectures.index');
+    Route::get('/auteurs', [AuteurUserController::class, 'index'])->name('auteurs.index');
+    Route::post('/livres/{id}/lecture', [LectureController::class, 'store'])->name('livres.lecture');
+    Route::post('/auteurs/{id}/follow', [AuteurUserController::class, 'toggleFollow'])->name('auteurs.toggleFollow');
+    Route::get('/auteurs-suivi', [AuteurUserController::class, 'auteursSuivis'])->name('auteurs.auteurs-suivi');
+    Route::get('/auteurs/{id}', [AuteurUserController::class, 'show'])->name('auteurs.show');
+    Route::get('/categories/{categorie}', [CategorieUserController::class, 'show'])->name('categories.show');
+    Route::get('/categories', [CategorieUserController::class, 'index'])->name('categories.index');
+    Route::post('/categories/choisir', [CategorieUserController::class, 'choisirThemes'])->name('categories.choisir');
+    Route::get('/themes-choisi', [CategorieUserController::class, 'themesChoisi'])->name('themes');
+    Route::delete('/themes/{categorie}', [CategorieUserController::class, 'retirerTheme'])->name('themes.retirer');
+    Route::get('/recherche', [RechercheController::class, 'index'])->name('recherche');
+
 });
 
 require __DIR__.'/auth.php';

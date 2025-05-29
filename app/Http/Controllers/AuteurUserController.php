@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auteur;
+use App\Models\Categorie;
+use App\Models\Livre;
 use Illuminate\Http\Request;
 
 class AuteurUserController extends Controller
@@ -9,9 +12,41 @@ class AuteurUserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function toggleFollow($id)
+{
+    $auteur = Auteur::findOrFail($id);
+    $user = auth()->user()->load('auteurSuivis');
+
+    if ($user->auteurSuivis->contains($auteur->id)) {
+        $user->auteurSuivis()->detach($auteur->id);
+    } else {
+        $user->auteurSuivis()->attach($auteur->id);
+    }
+
+    return back()->with('success', 'Action effectuée avec succès.');
+}
+
+public function auteursSuivis()
+{
+    $livres = Livre::with('auteur')->latest()->get();
+    $livresRecents = Livre::latest()->take(3)->get();
+    $topAuteurs = Auteur::take(3)->get();
+    $auteurs = Auteur::withCount('followers')->get();
+    $categories = Categorie::all();
+    $auteurs = auth()->user()->auteurSuivis()->withCount('followers')->get();
+    return view('user.auteurs.auteurs-suivi', compact('auteurs', 'livres', 'livresRecents', 'topAuteurs', 'categories'));
+}
+
+     public function index()
     {
-        //
+        $livres = Livre::with(['auteur', 'notes'])->latest()->get();
+        $topAuteurs = Auteur::take(3)->get();
+        $categories = Categorie::all();
+        $livresRecents = Livre::latest()->take(3)->get();
+        $auteurs = Auteur::withCount(['followers', 'livres'])->get();
+        $user = auth()->user();
+        return view('user.auteurs.index', compact('auteurs', 'user','livres', 'livresRecents', 'topAuteurs', 'categories'));
+
     }
 
     /**
@@ -35,7 +70,12 @@ class AuteurUserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $auteur = Auteur::with('livres')->withCount('followers')->findOrFail($id);
+       $user = auth()->user()->load('auteurSuivis');
+       $livresRecents = Livre::latest()->take(3)->get();
+        $topAuteurs = Auteur::take(3)->get();
+
+    return view('user.auteurs.show', compact('auteur', 'user', 'livresRecents', 'topAuteurs'));
     }
 
     /**
