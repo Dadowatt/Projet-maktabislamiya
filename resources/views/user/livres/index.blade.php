@@ -19,7 +19,7 @@
                             @php
                                 $moyenne = $livre->notes->avg('valeur');
                             @endphp
-                            <span class="me-auto text-dark">{{ $moyenne ? number_format($moyenne, 1) : 'N/A' }}</span>
+                            <span class="me-auto text-dark">{{ $moyenne ? number_format($moyenne, 1) : '0' }}</span>
                         </div>
                     </div>
                 </div>

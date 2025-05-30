@@ -39,9 +39,10 @@
             </button>
         </form>
         <div class="d-flex align-items-center">
-            <a href="{{ $livre->pdf_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary me-3">
+            <a href="{{ route('user.livres.lecture', $livre->id) }}" class="btn btn-primary me-3">
     Lecture
 </a>
+
             <form action="{{ route('user.livres.favoris', $livre->id) }}" method="POST" class="mb-0">
                 @csrf
                 <button type="submit" class="btn {{ $estFavori ? 'btn-danger' : 'btn-outline-danger' }}">

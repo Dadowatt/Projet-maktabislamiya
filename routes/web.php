@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     // return view('welcome');
-    return redirect()->route('login');
+    return redirect()->route('register');
 });
 
 
@@ -45,9 +45,9 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::post('livres/{id}/favoris', [FavorisController::class, 'store'])->name('livres.favoris');
     Route::post('/livres/{id}/note', [LivreUserController::class, 'note'])->name('livres.note');
     Route::get('/livres/{id}/lecture', [LectureController::class, 'lire'])->name('livres.lecture');
+    Route::post('/livres/{id}/lecture', [LectureController::class, 'store'])->name('livres.lecture.store');
     Route::get('/lectures', [LectureController::class, 'index'])->name('lectures.index');
     Route::get('/auteurs', [AuteurUserController::class, 'index'])->name('auteurs.index');
-    Route::post('/livres/{id}/lecture', [LectureController::class, 'store'])->name('livres.lecture');
     Route::post('/auteurs/{id}/follow', [AuteurUserController::class, 'toggleFollow'])->name('auteurs.toggleFollow');
     Route::get('/auteurs-suivi', [AuteurUserController::class, 'auteursSuivis'])->name('auteurs.auteurs-suivi');
     Route::get('/auteurs/{id}', [AuteurUserController::class, 'show'])->name('auteurs.show');

@@ -6,6 +6,7 @@ use App\Models\Auteur;
 use App\Models\Categorie;
 use App\Models\Livre;
 use Illuminate\Http\Request;
+use Storage;
 
 class LivreController extends Controller
 {
@@ -32,33 +33,43 @@ class LivreController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp,svg|max:2048',
-            'pdf_url' => 'required|url',
-            'auteur_id' => 'required|exists:auteurs,id',
-            'categorie_id' => 'nullable|exists:categories,id',
-        ]);
-        $imagePath = null;
-        if ($request->hasFile('image_couverture')) {
-            $imagePath = $request->file('image_couverture')->store('livres/couvertures', 'public');
-        }
+{
+    // Validation
+    $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'auteur_id' => 'required|exists:auteurs,id',
+        'categorie_id' => 'required|exists:categories,id',
+        'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'pdf_url' => 'nullable|mimes:pdf|max:10000',
+    ]);
 
-        // $pdfPath = $request->file('pdf_url')->store('livres/pdfs', 'public');
-        $pdfPath = $request->pdf_url;
-        Livre::create([
-            'titre' => $request->titre,
-            'description' => $request->description,
-            'image_couverture' => $imagePath,
-            'pdf_url' => $pdfPath,
-            'auteur_id' => $request->auteur_id,
-            'categorie_id' => $request->categorie_id,
-        ]);
+    // Création d'une nouvelle instance de Livre
+    $livre = new Livre();
+    $livre->titre = $request->titre;
+    $livre->description = $request->description;
+    $livre->auteur_id = $request->auteur_id;
+    $livre->categorie_id = $request->categorie_id;
 
-        return redirect()->route('admin.livres.index')->with('success', 'Livre ajouté avec succès.');
+    // Upload de l'image
+    if ($request->hasFile('image_couverture')) {
+        $pathImage = $request->file('image_couverture')->store('livres/images', 'public');
+        $livre->image_couverture = $pathImage;
     }
+
+    // Upload du fichier PDF
+    if ($request->hasFile('pdf_url')) {
+        $pathPdf = $request->file('pdf_url')->store('livres/pdfs', 'public');
+        $livre->pdf_url = $pathPdf;
+    }
+
+    // Enregistrement du livre
+    $livre->save();
+
+    // Redirection avec message
+    return redirect()->route('admin.livres.index')->with('success', 'Livre ajouté avec succès.');
+}
+
 
     /**
      * Display the specified resource.
@@ -82,39 +93,53 @@ class LivreController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Livre $livre)
-    {
-        $request->validate([
-            'titre' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'pdf_url' => 'required|url',
-            'auteur_id' => 'required|exists:auteurs,id',
-            'categorie_id' => 'nullable|exists:categories,id',
-        ]);
+{
+    // Validation des données
+    $request->validate([
+        'titre' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'auteur_id' => 'required|exists:auteurs,id',
+        'categorie_id' => 'required|exists:categories,id',
+        'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'pdf_url' => 'nullable|mimes:pdf|max:10000',
+    ]);
 
-        if ($request->hasFile('image_couverture')) {
-            $imagePath = $request->file('image_couverture')->store('livres/couvertures', 'public');
-            $livre->image_couverture = $imagePath;
+    // Mise à jour des champs
+    $livre->titre = $request->titre;
+    $livre->description = $request->description;
+    $livre->auteur_id = $request->auteur_id;
+    $livre->categorie_id = $request->categorie_id;
+
+    // Si une nouvelle image est uploadée
+    if ($request->hasFile('image_couverture')) {
+        // Supprimer l'ancienne image
+        if ($livre->image_couverture && \Storage::disk('public')->exists($livre->image_couverture)) {
+            \Storage::disk('public')->delete($livre->image_couverture);
         }
 
-        // if ($request->hasFile('pdf_url')) {
-        //     $pdfPath = $request->file('pdf_url')->store('livres/pdfs', 'public');
-        //     $livre->pdf_url = $pdfPath;
-        // }
-
-        if ($request->hasFile('image_couverture')) {
-            $imagePath = $request->file('image_couverture')->store('livres/couvertures', 'public');
-            $livre->image_couverture = $imagePath;
-       }
-
-        $livre->titre = $request->titre;
-        $livre->description = $request->description;
-        $livre->auteur_id = $request->auteur_id;
-        $livre->categorie_id = $request->categorie_id;
-        $livre->save();
-
-        return redirect()->route('admin.livres.index')->with('success', 'Livre modifié avec succès.');
+        // Enregistrer la nouvelle image
+        $imagePath = $request->file('image_couverture')->store('livres/images', 'public');
+        $livre->image_couverture = $imagePath;
     }
+
+    // Si un nouveau PDF est uploadé
+    if ($request->hasFile('pdf_url')) {
+        // Supprimer l'ancien PDF
+        if ($livre->pdf_url && \Storage::disk('public')->exists($livre->pdf_url)) {
+            \Storage::disk('public')->delete($livre->pdf_url);
+        }
+
+        // Enregistrer le nouveau PDF
+        $pdfPath = $request->file('pdf_url')->store('livres/pdfs', 'public');
+        $livre->pdf_url = $pdfPath;
+    }
+
+    // Enregistrer les modifications
+    $livre->save();
+
+    // Redirection avec message de succès
+    return redirect()->route('admin.livres.index')->with('success', 'Livre mis à jour avec succès.');
+}
 
     /**
      * Remove the specified resource from storage.

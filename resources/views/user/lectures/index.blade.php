@@ -17,15 +17,18 @@
                     </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ $livre->titre }}</h5>
+                            <p class="card-text text-muted small mb-1">{{ $livre->auteur->nom ?? 'Auteur inconnu' }}</p>
                              <div class="d-flex align-items-center text-warning">
                             <i class="fa-solid fa-star me-1"></i>
                             @php
                                 $moyenne = $livre->notes->avg('valeur');
                             @endphp
-                            <span class="me-auto text-dark">{{ $moyenne ? number_format($moyenne, 1) : 'N/A' }}</span>
+                            <span class="me-auto text-dark">{{ $moyenne ? number_format($moyenne, 1) : '0' }}</span>
                         </div>
-                            <!-- <p class="card-text">{{ Str::limit($livre->description, 100) }}</p> -->
-                             <a href="{{ $livre->pdf_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-success mt-1"><i class="fas fa-book-open me-2"></i>Reprendre</a>
+                        <div class="text-center">
+                            <a href="{{ route('user.livres.lecture', $livre->id) }}" target="_blank" class="btn btn-success me-3 mt-2">
+                            <i class="fas fa-book-open me-2"></i>Reprendre</a>
+                        </div>
                         </div>
                     </div>
                 </div>
