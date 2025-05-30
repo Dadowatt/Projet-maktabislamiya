@@ -49,21 +49,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-3">
-                <li class="nav-item"><a class="nav-link" href="{{ route('user.home') }}">Accueil</a></li>
+                <li class="nav-item me-3"><a class="nav-link active" href="{{ route('user.home') }}">Accueil</a></li>
 
                 @if($adoration)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}">Adoration</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}"><span><i class="bi bi-heart-fill text-light me-1"></i></span>Adoration</a>
 </li>
 @endif
                 @if($apprentissage)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}">Apprentissage</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}"><i class="bi bi-mortarboard-fill me-2 text-light"></i>Apprentissage</a>
 </li>
 @endif
             @if($comportement)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}">Comportement islamique</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}"><i class="bi bi-people-fill me-2 text-light"></i>Comportement</a>
 </li>
 @endif
             </ul>
@@ -163,7 +163,7 @@
                  alt="{{ $auteur->nom }}"></a>
             <div style="font-size: 0.85rem;">
                 {{ $auteur->nom }}
-                <span class="bg-secondary small">{{ $auteur->followers_count }}</span>
+                <!-- <span class="bg-secondary small">{{ $auteur->followers_count }}</span> -->
             </div>
         </div>
     @endforeach
@@ -173,8 +173,51 @@
     </div>
 </div>
 
-<footer class="bg-dark text-light pt-4 text-center mt-4">
-    <small>&copy; {{ date('Y') }} Maktaba.islam</small>
+<footer class="bg-dark text-white pt-5 pb-4">
+  <div class="container text-md-left">
+    <div class="row">
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
+        <h5 class="text-uppercase fw-bold mb-4">
+        Maktaba Islam
+        </h5>
+        <p>Maktaba Islam est une bibliothèque numérique islamique à but non
+          lucratif conçue pour les musulman(e)s francophones afin de les
+          fournir un accès direct aux ressources d'information, numériques
+          et analogiques de la religion islamique.</p>
+        <div class="mt-3">
+          <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-white me-3"><i class="fab fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <h6 class="text-uppercase fw-bold mb-4">Services</h6>
+        <p><a href="#" class="text-white text-decoration-none">À propos de nous</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Mon Compte</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Nous contacter</a></p>
+      </div>
+
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <h6 class="text-uppercase fw-bold mb-4">Informations légales</h6>
+        <p><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></p>
+        <p><a href="#" class="text-white text-decoration-none">Conditions générales d'utilisation</a></p>
+        <p><a href="#" class="text-white text-decoration-none"> FAQ</a></p>
+      </div>
+
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+        <h6 class="text-uppercase fw-bold mb-4">Contact Info</h6>
+        <p><i class="fas fa-phone me-2"></i> +221 33 837 55 51</p>
+        <p><i class="fas fa-envelope me-2"></i> Maktaba-islam@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt me-2"></i> Ville de Guediawaye. Dakar, Rue SN-77</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-4 border-top pt-3 text-center">
+    <p class="mb-0">&copy; {{ date('Y') }} <span class="text-success">Maktaba Islam.</span> Tout droit réservé.</p>
+  </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

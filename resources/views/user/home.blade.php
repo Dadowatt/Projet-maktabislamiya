@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .categorie{
+        text-decoration: none;
+        color: #555;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    
 @extends('layouts.user')
 
 @section('content')
@@ -42,7 +58,7 @@
             @foreach ( $categories as $categorie )
             <div class="col">
                 <div class="p-4 shadow">
-                    <a href="{{ route('user.categories.show', $categorie) }}">{{ $categorie->nom }}</a></div>
+                    <a href="{{ route('user.categories.show', $categorie) }}" class="categorie">{{ $categorie->nom }}</a></div>
               </div>
             @endforeach
              
@@ -55,7 +71,7 @@
         <div class="row mt-5">
             <div class="d-flex justify-content-between align-items-center">
           <h5 class="text-success mb-2">Liste des auteurs</h5>
-          <a href="#" class="text-success">voir tout <i class="fas fa-angle-double-right"></i></a>
+          <a href="{{ route('user.auteurs.index') }}" class="text-success">voir tout <i class="fas fa-angle-double-right"></i></a>
         </div>
         <div id="carouselAuteurs" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
@@ -75,13 +91,11 @@
         @endforeach
     </div>
 
-    <!-- Flèche précédente -->
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselAuteurs" data-bs-slide="prev">
         <span class="bi bi-chevron-left fs-1 text-dark"></span>
         <span class="visually-hidden">Précédent</span>
     </button>
 
-    <!-- Flèche suivante -->
     <button class="carousel-control-next" type="button" data-bs-target="#carouselAuteurs" data-bs-slide="next">
         <span class="bi bi-chevron-right fs-1 text-dark"></span>
         <span class="visually-hidden">Suivant</span>
@@ -90,3 +104,5 @@
         </div>
     </section>
 @endsection
+</body>
+</html>

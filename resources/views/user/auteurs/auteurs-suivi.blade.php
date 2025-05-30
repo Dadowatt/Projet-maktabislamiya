@@ -1,11 +1,12 @@
-@extends('layouts.user') {{-- Adapte si besoin --}}
+@extends('layouts.user')
 
 @section('content')
 <div class="container mt-4">
-    <h3>Mes Auteurs Suivis</h3>
+    <h3 class="text-success">Mes Auteurs Suivis</h3>
+    <hr>
     <div class="row">
         @forelse($auteurs as $auteur)
-            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
+            <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4 mt-2">
                 <div class="card text-center h-100 shadow-sm">
                     <div class="card-body d-flex flex-column align-items-center">
                         <a href="{{ route('user.auteurs.show', $auteur->id) }}">

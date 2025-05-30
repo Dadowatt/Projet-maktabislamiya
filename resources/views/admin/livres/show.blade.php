@@ -21,10 +21,10 @@
                             </h6>
                             <div class="d-flex justify-content-between align-items-center mt-2">
                                 <a href="{{ route('admin.livres.edit', $livre) }}" class="btn btn-success btn-sm fw-bold">Modifier</a>
-                                <form action="{{ route('admin.auteurs.destroy', $livre) }}" method="POST" style="display:inline;">
+                              <form action="{{ route('admin.livres.destroy', $livre) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Supprimer cet auteur ?')">Supprimer</button>
+                               <button type="submit" class="btn btn-danger" onclick="return confirm('Supprimer ce livre ?')">Supprimer</button>
                                 </form>
                                 <a href="{{ $livre->pdf_url }}" class="btn btn-primary" target="_blank">Voir pdf</a>
                             </div>

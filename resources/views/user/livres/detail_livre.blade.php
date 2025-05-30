@@ -15,10 +15,8 @@
                 {{ $livre->auteur->nom ?? '' }}
             </a>
         </p>
-
         <p><strong>Catégories :</strong> {{ $livre->categorie->nom }}</p>
         <p><strong>Description :</strong> {{ $livre->description }}</p>
-
         <div>
             <span>
                 @for($i = 1; $i <= 5; $i++)
@@ -27,7 +25,6 @@
             </span>
             <span class="ms-2">({{ $nbAvis }} avis)</span>
         </div>
-
         <form action="{{ route('user.livres.note', $livre->id) }}" method="POST" class="mb-2">
             @csrf
             <label class="me-2">Noter ce livre :</label>
@@ -41,12 +38,10 @@
                 <i class="fas fa-paper-plane"></i> Soumettre ma note
             </button>
         </form>
-
         <div class="d-flex align-items-center">
-            <a href="{{ $livre->lien_pdf }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary me-3">
-                Lecture
-            </a>
-
+            <a href="{{ $livre->pdf_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary me-3">
+    Lecture
+</a>
             <form action="{{ route('user.livres.favoris', $livre->id) }}" method="POST" class="mb-0">
                 @csrf
                 <button type="submit" class="btn {{ $estFavori ? 'btn-danger' : 'btn-outline-danger' }}">
@@ -55,7 +50,6 @@
                 </button>
             </form>
         </div>
-
     </div>
 </div>
 @endsection

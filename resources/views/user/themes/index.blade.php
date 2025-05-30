@@ -3,8 +3,8 @@
 @section('content')
     <section class="container my-4">
         <h3 class="mb-4 text-success">Vos thèmes choisis et leurs livres</h3>
-
         @forelse ($categories as $categorie)
+        <hr>
             <div class="mb-5">
                 <div class="d-flex justify-content-between align-items-center mb-2">
                     <h4 class="text-primary mb-0">{{ $categorie->nom }}</h4>
@@ -17,7 +17,6 @@
                         </button>
                     </form>
                 </div>
-
                 <div class="row">
                     @forelse ($categorie->livres as $livre)
                         <div class="col-12 col-sm-6 col-md-3 mb-4">
