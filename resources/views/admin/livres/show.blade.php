@@ -1,41 +1,37 @@
 @extends('layouts.admin')
-<!-- <p>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates, maiores placeat quidem accusantium fugiat nulla architecto illo quas? Non ipsa quaerat repellat alias mollitia quasi? Dolorem qui harum minima explicabo.
-</p> -->
 @section('content')
 <div class="container mt-4">
-    <h2>Détails du livre</h2>
-
-    <div class="card mb-4">
+    <h2 class="text-center text-success mb-4">Détails du livre</h2>
+    <div class="card mb-4 w-75 mx-auto">
         <div class="row g-0">
             @if($livre->image_couverture)
-            <div class="col-md-4">
-                <img src="{{ asset('storage/' . $livre->image_couverture) }}" class="img-fluid rounded-start" alt="Image de couverture">
+            <div class="col-sm-12 col-md-4">
+                <img src="{{ asset('storage/' . $livre->image_couverture) }}" class="img-fluid rounded-start" style="height:30rem" alt="Image de couverture">
             </div>
             @endif
-            <div class="col-md-8">
+            <div class="col-sm-12 col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{ $livre->titre }}</h5>
+                    <h5 class="card-title mb-4">{{ $livre->titre }}</h5>
                     <p class="card-text"><strong>Description :</strong> {{ $livre->description ?? 'Aucune description' }}</p>
                     <p class="card-text"><strong>Auteur :</strong> {{ $livre->auteur->nom }}</p>
                     <p class="card-text"><strong>Catégorie :</strong> {{ $livre->categorie->nom ?? 'Aucune' }}</p>
                     <p class="card-text">
                         <strong>Fichier PDF :</strong>
                         @if($livre->pdf_url)
-                            <a href="{{ asset('storage/' . $livre->pdf_url) }}" class="btn btn-sm btn-outline-primary" target="_blank">Voir le PDF</a>
+                            <a href="{{ asset('storage/' . $livre->pdf_url) }}" class="btn btn-sm btn-outline-success" target="_blank">Voir le PDF</a>
                         @else
                             <span class="text-muted">Non disponible</span>
                         @endif
                     </p>
 
                     <div class="mt-4">
-                        <a href="{{ route('admin.livres.edit', $livre) }}" class="btn btn-warning">Modifier</a>
+                        <a href="{{ route('admin.livres.edit', $livre) }}" class="btn btn-warning me-2">Modifier</a>
                         <form action="{{ route('admin.livres.destroy', $livre) }}" method="POST" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Supprimer</button>
                         </form>
-                        <a href="{{ route('admin.livres.index') }}" class="btn btn-secondary ms-2">Retour à la liste</a>
+                        <a href="{{ route('admin.livres.index') }}" class="btn btn-success ms-2">Retour à la liste</a>
                     </div>
                 </div>
             </div>

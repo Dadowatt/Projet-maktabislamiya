@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use App\Models\Auteur;
 use App\Models\Categorie;
 use App\Models\Livre;
 use Illuminate\Http\Request;
-use Storage;
 
 class LivreController extends Controller
 {
@@ -34,13 +33,12 @@ class LivreController extends Controller
      */
     public function store(Request $request)
 {
-    // Validation
     $request->validate([
         'titre' => 'required|string|max:255',
         'description' => 'nullable|string',
         'auteur_id' => 'required|exists:auteurs,id',
         'categorie_id' => 'required|exists:categories,id',
-        'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image_couverture' => 'nullable|image|mimes:jpeg,png,webp,jpg,gif|max:2048',
         'pdf_url' => 'nullable|mimes:pdf|max:10000',
     ]);
 
@@ -66,11 +64,8 @@ class LivreController extends Controller
     // Enregistrement du livre
     $livre->save();
 
-    // Redirection avec message
     return redirect()->route('admin.livres.index')->with('success', 'Livre ajouté avec succès.');
 }
-
-
     /**
      * Display the specified resource.
      */
@@ -94,13 +89,12 @@ class LivreController extends Controller
      */
     public function update(Request $request, Livre $livre)
 {
-    // Validation des données
     $request->validate([
         'titre' => 'required|string|max:255',
         'description' => 'nullable|string',
         'auteur_id' => 'required|exists:auteurs,id',
         'categorie_id' => 'required|exists:categories,id',
-        'image_couverture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'image_couverture' => 'nullable|image|mimes:jpeg,png,webp,jpg,gif|max:2048',
         'pdf_url' => 'nullable|mimes:pdf|max:10000',
     ]);
 
@@ -112,9 +106,9 @@ class LivreController extends Controller
 
     // Si une nouvelle image est uploadée
     if ($request->hasFile('image_couverture')) {
-        // Supprimer l'ancienne image
-        if ($livre->image_couverture && \Storage::disk('public')->exists($livre->image_couverture)) {
-            \Storage::disk('public')->delete($livre->image_couverture);
+    // Supprimer l'ancienne image
+        if ($livre->image_couverture && Storage::disk('public')->exists($livre->image_couverture)) {
+            Storage::disk('public')->delete($livre->image_couverture);
         }
 
         // Enregistrer la nouvelle image
@@ -125,8 +119,8 @@ class LivreController extends Controller
     // Si un nouveau PDF est uploadé
     if ($request->hasFile('pdf_url')) {
         // Supprimer l'ancien PDF
-        if ($livre->pdf_url && \Storage::disk('public')->exists($livre->pdf_url)) {
-            \Storage::disk('public')->delete($livre->pdf_url);
+        if ($livre->pdf_url && Storage::disk('public')->exists($livre->pdf_url)) {
+            Storage::disk('public')->delete($livre->pdf_url);
         }
 
         // Enregistrer le nouveau PDF

@@ -6,10 +6,10 @@
     <div class="row">
         @forelse($favoris as $livre)
             <div class="col-12 col-sm-6 col-md-3 mb-4 mx-auto" style="max-width: 300px;">
-                    <div class="card shadow">
+                    <div class="card shadow p-2">
                        <a href="{{ route('user.livres.show', $livre->id) }}">
                         <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}"
-                             class="card-img-top" alt="Couverture" style="height: 15rem; object-fit:cover;">
+                             class="card-img-top" alt="Couverture" style="object-fit:contain;">
                     </a>
                         <div class="card-body">
                             <h5 class="card-title">{{ $livre->titre }}</h5>
