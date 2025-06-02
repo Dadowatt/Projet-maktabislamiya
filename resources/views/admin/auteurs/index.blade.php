@@ -1,12 +1,14 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
-     @if(session('success'))
+<div class="container">
+    @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+
     <h2>Liste des auteurs</h2>
     <a href="{{ route('admin.auteurs.create') }}" class="btn btn-primary mb-3">Ajouter un auteur</a>
+
     <div class="row">
         @forelse($auteurs as $auteur)
             <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
@@ -18,8 +20,17 @@
                                  alt="{{ $auteur->nom }}"
                                  style="width:100%; height:100%; object-fit:cover;">
                         </a>
+
                         <div class="fw-bold mb-2">{{ $auteur->nom }}</div>
+
+                        {{-- Nouveau : Affichage des stats --}}
+                        <!-- <div class="text-muted small mb-2">
+                            📚 {{ $auteur->livres->count() }} livre{{ $auteur->livres->count() > 1 ? 's' : '' }}<br>
+                            👥 {{ $auteur->followers_count }} follower{{ $auteur->followers_count > 1 ? 's' : '' }}
+                        </div> -->
+
                         <a href="{{ route('admin.auteurs.edit', $auteur) }}" class="btn btn-sm btn-success mb-1">Modifier</a>
+
                         <form action="{{ route('admin.auteurs.destroy', $auteur) }}" method="POST" onsubmit="return confirm('Supprimer cet auteur ?');">
                             @csrf
                             @method('DELETE')

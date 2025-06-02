@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
+<div class="container">
     <h2>Liste des catégories</h2>
 
     @if(session('success'))
@@ -31,7 +31,7 @@
                         <form action="{{ route('admin.categories.destroy', $categorie) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Supprimer cet auteur ?')"
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Supprimer cette catégorie ?')"
                         ><i class="bi bi-trash-fill"></i></button>
                         </form>
                     </td>

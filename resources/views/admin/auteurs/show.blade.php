@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
-    <div class="row align-items-center mb-5">
+<div class="container">
+    <div class="row align-items-center">
         <div class="col-md-3 text-center text-md-start">
             <div style="border:3px solid #3498db; border-radius:50%; width:150px; height:150px; overflow:hidden; margin: 0 auto 10px auto;">
                 <img src="{{ $auteur->photo ? asset('storage/'.$auteur->photo) : asset('default-avatar.png') }}"
@@ -12,13 +12,16 @@
         </div>
         <div class="col-md-9">
             <h3 class="mb-2">{{ $auteur->nom }}</h3>
-            <p class="text-muted"><strong>{{ $auteur->followers_count }}</strong> {{ Str::plural('abonné', $auteur->followers_count) }}</p>
+            <p class="text-muted">
+                <strong>{{ $auteur->followers_count }}</strong> 
+                {{ Str::plural('abonné', $auteur->followers_count) }}
+            </p>
         </div>
     </div>
-
+    <hr>
     <h4 class="mb-3">Ses ouvrages</h4>
     <div class="row g-4">
-        @forelse($livres as $livre)
+        @forelse($auteur->livres as $livre)
             <div class="col-12 col-sm-6 col-md-3 mb-4" style="max-width: 250px;">
                 <div class="card shadow-sm" style="height: 27rem;">
                     <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}"
@@ -39,5 +42,4 @@
         @endforelse
     </div>
 </div>
-
 @endsection

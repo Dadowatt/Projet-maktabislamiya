@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <form class="form-control mt-5 mx-auto w-75 bg-light" action="{{ route('admin.auteurs.store') }}" method="POST" enctype="multipart/form-data">
-    <h3>Ajouter un auteur</h3>
+    <h4>Ajouter un auteur</h4>
     @csrf
     <div class="mb-3">
         <label for="nom" class="form-label">Nom de l'auteur</label>

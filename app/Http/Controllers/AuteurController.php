@@ -12,7 +12,7 @@ class AuteurController extends Controller
      */
     public function index()
     {
-        $auteurs = Auteur::all();
+        $auteurs = Auteur::withCount('followers')->with('livres')->get();
         return view('admin.auteurs.index', compact('auteurs'));
     }
 
@@ -52,9 +52,9 @@ class AuteurController extends Controller
      */
     public function show(Auteur $auteur)
     {
-    $auteur->loadCount('followers');
-    $livres = $auteur->livres;
-    return view('admin.auteurs.show', compact('auteur', 'livres'));
+        $auteur->load(['livres', 'followers']);
+        $auteur->followers_count = $auteur->followers->count();
+        return view('admin.auteurs.show', compact('auteur'));
     }
 
     /**
@@ -71,19 +71,21 @@ class AuteurController extends Controller
     public function update(Request $request, Auteur $auteur)
     {
         $request->validate([
-        'nom' => 'required|string|max:255',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048'
-    ]);
+            'nom' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048'
+        ]);
 
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('auteurs', 'public');
-        $auteur->photo = $photoPath;
-    }
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('auteurs', 'public');
+        }
 
-    $auteur->nom = $request->nom;
-    $auteur->save();
+        $auteur->update([
+            'nom' => $request->nom,
+            'photo' => $photoPath ?? $auteur->photo,
+        ]);
 
-    return redirect()->route('admin.auteurs.index')->with('success', 'Auteur modifié avec succès.');
+        return redirect()->route('admin.auteurs.index')->with('success', 'Auteur modifié avec succès.');
     }
 
     /**
@@ -91,7 +93,7 @@ class AuteurController extends Controller
      */
     public function destroy(Auteur $auteur)
     {
-        $auteur->delete;
+        $auteur->delete();
         return redirect()->route('admin.auteurs.index')->with('success', 'Auteur supprimé avec succès.');
     }
 }
