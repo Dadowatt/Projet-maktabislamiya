@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container mt-4">
-    <h2 class="text-center text-success mb-4">Détails du livre</h2>
-    <div class="card mb-4 w-75 mx-auto">
+    <h2 class="mb-4">Détails du livre</h2>
+    <div class="card mb-4 w-75">
         <div class="row g-0">
             @if($livre->image_couverture)
             <div class="col-sm-12 col-md-4">
@@ -11,7 +11,7 @@
             @endif
             <div class="col-sm-12 col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title mb-4">{{ $livre->titre }}</h5>
+                    <h5 class="card-title mb-4 text-success">{{ $livre->titre }}</h5>
                     <p class="card-text"><strong>Description :</strong> {{ $livre->description ?? 'Aucune description' }}</p>
                     <p class="card-text"><strong>Auteur :</strong> {{ $livre->auteur->nom }}</p>
                     <p class="card-text"><strong>Catégorie :</strong> {{ $livre->categorie->nom ?? 'Aucune' }}</p>

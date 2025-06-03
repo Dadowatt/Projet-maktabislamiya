@@ -35,7 +35,7 @@ public function notes()
 }
 public function lectures()
 {
-     return $this->belongsToMany(Livre::class, 'lectures')->withTimestamps();
+     return $this->belongsToMany(Livre::class, 'lectures');
 }
 
 public function commentaire()
@@ -52,7 +52,6 @@ public function categories()
 {
     return $this->belongsToMany(Categorie::class, 'categorie_user'); 
 }
-
 
     /**
      * The attributes that should be hidden for serialization.

@@ -30,8 +30,7 @@ class Livre extends Model
 
     public function lecteurs()
     {
-        // return $this->hasMany(Lecture::class);
-        return $this->belongsToMany(User::class, 'lectures')->withTimestamps();
+        return $this->belongsToMany(User::class, 'lectures');
     }
 
     public function favoris()

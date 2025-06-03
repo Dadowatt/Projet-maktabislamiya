@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        footer a{
+            text-decoration: none;
+        }
         .main-content-scroll {
             max-height: 85vh;
             overflow-y: auto;
@@ -36,7 +39,7 @@
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-light* bg-light">
     @php
     $adoration = \App\Models\Categorie::where('nom', 'Adoration')->first();
     $apprentissage = \App\Models\Categorie::where('nom', 'Apprentissage')->first();
@@ -53,22 +56,22 @@
 
                 @if($adoration)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}"><span><i class="bi bi-heart-fill text-light me-1"></i></span>Adoration</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}"><span><i class="bi bi-heart-fill text-success me-1"></i></span>Adoration</a>
 </li>
 @endif
                 @if($apprentissage)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}"><i class="bi bi-mortarboard-fill me-2 text-light"></i>Apprentissage</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}"><i class="bi bi-mortarboard-fill me-2 text-success"></i>Apprentissage</a>
 </li>
 @endif
             @if($comportement)
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}"><i class="bi bi-people-fill me-2 text-light"></i>Comportement</a>
+    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}"><i class="bi bi-people-fill me-2 text-success"></i>Comportement</a>
 </li>
 @endif
             </ul>
     <form class="d-flex ms-auto" action="{{ route('user.recherche') }}" method="GET">
-    <input class="form-control me-2" type="search" name="q" placeholder="Chercher..." aria-label="Search" required>
+    <input class="form-control me-2" type="search" name="q" placeholder="Trier par..." aria-label="Search" required>
     <select class="form-select me-2" name="type" style="width: auto;">
         <option value="livre" selected>Livre</option>
         <option value="auteur">Auteur</option>
@@ -101,7 +104,7 @@
                 <h6 class="text-success fw-bold mb-3">Activité</h6>
                 <div class="list-group">
                     <a href="{{ route('user.themes') }}" class="list-group-item list-group-item-action"><i class="bi bi-bookmark-check me-2"></i> Thèmes choisi</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-circle me-2"></i> Profil</a>
+                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-circle me-2"></i> Profile</a>
                     <a href="#" class="list-group-item list-group-item-action" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
                     </a>
@@ -173,7 +176,7 @@
     </div>
 </div>
 
-<footer class="bg-dark text-white pt-5 pb-4">
+<footer class="bg-light text-dark pt-5 pb-4">
   <div class="container text-md-left">
     <div class="row">
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
@@ -185,32 +188,32 @@
           fournir un accès direct aux ressources d'information, numériques
           et analogiques de la religion islamique.</p>
         <div class="mt-3">
-          <a href="#" class="text-white me-3"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-white me-3"><i class="fab fa-telegram"></i></a>
+          <a href="#" class="me-3"><i class="text-success fab fa-facebook"></i></a>
+          <a href="#" class="me-3"><i class="text-success fab fa-twitter"></i></a>
+          <a href="#" class="me-3"><i class="text-success fab fa-instagram"></i></a>
+          <a href="#" class="me-3"><i class="text-success fab fa-telegram"></i></a>
         </div>
       </div>
 
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold mb-4">Services</h6>
-        <p><a href="#" class="text-white text-decoration-none">À propos de nous</a></p>
-        <p><a href="#" class="text-white text-decoration-none">Mon Compte</a></p>
-        <p><a href="#" class="text-white text-decoration-none">Nous contacter</a></p>
+        <p><a href="#" class="text-dark">À propos de nous</a></p>
+        <p><a href="#" class="text-dark">Mon Compte</a></p>
+        <p><a href="#" class="text-dark">Nous contacter</a></p>
       </div>
 
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold mb-4">Informations légales</h6>
-        <p><a href="#" class="text-white text-decoration-none">Politique de confidentialité</a></p>
-        <p><a href="#" class="text-white text-decoration-none">Conditions générales d'utilisation</a></p>
-        <p><a href="#" class="text-white text-decoration-none"> FAQ</a></p>
+        <p><a href="#" class="text-dark">Politique de confidentialité</a></p>
+        <p><a href="#" class="text-dark">Conditions générales d'utilisation</a></p>
+        <p><a href="#" class="text-dark"> FAQ</a></p>
       </div>
 
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
         <h6 class="text-uppercase fw-bold mb-4">Contact Info</h6>
-        <p><i class="fas fa-phone me-2"></i> +221 33 837 55 51</p>
-        <p><i class="fas fa-envelope me-2"></i> Maktaba-islam@gmail.com</p>
-        <p><i class="fas fa-map-marker-alt me-2"></i> Ville de Guediawaye. Dakar, Rue SN-77</p>
+        <p><i class="fas fa-phone me-2 text-success"></i> +221 33 837 55 51</p>
+        <p><i class="fas fa-envelope me-2 text-success"></i> Maktaba-islam@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt me-2 text-success"></i> Ville de Guediawaye. Dakar, Rue SN-77</p>
       </div>
     </div>
   </div>

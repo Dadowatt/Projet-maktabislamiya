@@ -25,20 +25,20 @@
     <div class="row">
         @foreach($livres->take(8) as $livre)
             <div class="col-12 col-sm-6 col-md-3 mb-4 mx-auto" style="max-width: 300px;">
-                <div class="card shadow p-2" style="height: 25rem;">
+                <div class="card shadow p-2" style="min-height: 28rem;">
                     <a href="{{ route('user.livres.show', $livre->id) }}">
                         <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}"
-                             class="card-img-top" alt="Couverture" style="height: 15rem; object-fit:cover;">
+                             class="card-img-top" alt="Couverture" style="height: 16rem; object-fit:contain;">
                     </a>
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <h6 class="card-title mb-1">{{ $livre->titre }}</h6>
-                        <p class="card-text text-muted small mb-1">{{ $livre->auteur->nom ?? '' }}</p>
+                    <div class="card-body bg-light">
+                        <h6 class="card-title">{{ $livre->titre }}</h6>
+                        <p class="card-text text-muted small">{{ $livre->auteur->nom ?? '' }}</p>
                         <div class="d-flex align-items-center text-warning">
                             <i class="fa-solid fa-star me-1"></i>
                             @php
     $moyenne = $livre->notes->avg('valeur');
 @endphp
-<span class="me-auto text-dark">{{ number_format($moyenne, 1) ?? 'N/A' }}</span>
+<span class="me-auto text-dark">{{ number_format($moyenne, 1) ?? '' }}</span>
                         </div>
                     </div>
                 </div>
@@ -75,11 +75,11 @@
         </div>
         <div id="carouselAuteurs" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
-        @foreach ($auteurs->chunk(3) as $chunkIndex => $auteursChunk)
+        @foreach ($auteurs->chunk(4) as $chunkIndex => $auteursChunk)
             <div class="carousel-item @if($chunkIndex === 0) active @endif">
                 <div class="d-flex justify-content-center gap-4 flex-wrap">
                     @foreach ($auteursChunk as $auteur)
-                        <div class="text-center">
+                        <div class="text-center" style="width: 150px;">
                             <a href="{{ route('user.auteurs.show', $auteur->id) }}">
                                 <img src="{{ asset('storage/' . $auteur->photo) }}" class="rounded-circle border border-success border-2" alt="{{ $auteur->nom }}" width="100" height="100">
                             </a>

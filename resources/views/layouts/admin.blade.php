@@ -135,7 +135,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bienvenue Admin</span>
             <img class="img-profile rounded-circle"
-                src="{{ asset('img/default-avatar.jpg') }}" width="40" height="40">
+                src="{{ asset('img/log.jpg') }}" width="40" height="40">
         </a>
 
         <!-- Dropdown - User -->

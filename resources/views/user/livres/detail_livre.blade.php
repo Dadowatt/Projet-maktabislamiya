@@ -3,7 +3,7 @@
 @section('content')
     <a href="{{ route('user.home') }}" class="text-success fs-3"><i class="bi bi-arrow-left-circle"></i></a>
     <h4 class="text-muted mb-2">Details du livre:</h4>
-    <div class="card mb-4 mx-auto">
+    <div class="card mb-4 mx-auto border-0">
     <div class="row g-0">
     <div class="col-sm-12 col-md-4">
         <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}"
@@ -11,7 +11,7 @@
     </div>
     <div class="col-sm-12 col-md-8">
         <div class="card-body">
-            <h5 class="card-title text-success">{{ $livre->titre }}</h5>
+            <h5 class="card-title text-success mb-3">{{ $livre->titre }}</h5>
             <p class="catd-text"><strong>Auteur :</strong> <a href="{{ route('user.auteurs.show', $livre->auteur->id ?? '') }}">
             {{ $livre->auteur->nom ?? '' }}</a></p>
             <p class="card-text"><strong>Description :</strong> {{ $livre->description }}</p>
@@ -38,10 +38,10 @@
             </button>
         </form>
         <div class="d-flex align-items-center">
-        <a href="{{ route('user.livres.lecture', $livre->id) }}" class="btn btn-primary me-3">
+        <a href="{{ route('user.livres.lecture', $livre->id) }}" class="btn btn-success me-3" target="_blank">
             Lecture
         </a>
-        <a href="{{ asset('storage/' . $livre->pdf_url) }}" class="btn btn-sm btn-outline-success p-2 me-2" download>
+        <a href="{{ asset('storage/' . $livre->pdf_url) }}" class="btn btn-sm btn-outline-success p-2 me-3" download>
                 Télécharger le PDF
             </a>
             <form action="{{ route('user.livres.favoris', $livre->id) }}" method="POST" class="mb-0">
