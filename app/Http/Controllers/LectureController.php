@@ -25,16 +25,16 @@ class LectureController extends Controller
     return redirect(asset('storage/' . $livre->pdf_url));
 }
      public function index()
-    {
-        $user = auth()->user();
+{
+    $user = auth()->user();
     $lectures = $user->lectures()->with('auteur')->get();
-     $livres = Livre::with('auteur')->latest()->get();
+    $livres = Livre::with('auteur')->latest()->get();
     $livresRecents = Livre::latest()->take(3)->get();
-    $topAuteurs = Auteur::take(3)->get();
-    $auteurs = Auteur::withCount('followers')->get();
+    $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
+    $auteurs = Auteur::withCount(['followers', 'livres'])->get();
     $categories = Categorie::all();
     return view('user.lectures.index', compact('lectures','livres', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
-    }
+}
 
     /**
      * Show the form for creating a new resource.

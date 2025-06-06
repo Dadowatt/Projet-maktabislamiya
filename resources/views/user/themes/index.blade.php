@@ -20,19 +20,19 @@
                 <div class="row">
                     @forelse ($categorie->livres as $livre)
                         <div class="col-12 col-sm-6 col-md-3 mb-4">
-                            <div class="card h-100 shadow-sm">
+                            <div class="card shadow-sm p-2" style="min-height:26rem">
                                 <a href="{{ route('user.livres.show', $livre->id) }}">
                                     <img src="{{ $livre->image_couverture ? asset('storage/' . $livre->image_couverture) : asset('default-cover.jpg') }}"
-                                         class="card-img-top" alt="{{ $livre->titre }}" style="height: 200px; object-fit: cover;">
+                                         class="card-img-top" alt="{{ $livre->titre }}" style="height: 16rem; object-fit: contain;">
                                 </a>
-                                <div class="card-body">
+                                <div class="card-body bg-light">
                                     <h6 class="card-title">{{ $livre->titre }}</h6>
                                     <p class="card-text text-muted small">
                                         {{ $livre->auteur->nom ?? 'Auteur inconnu' }}
                                     </p>
                                     <div class="d-flex align-items-center">
                                         <i class="fa-solid fa-star text-warning me-1"></i>
-                                        <span class="me-auto">{{ $livre->note ?? '4.7' }}</span>
+                                        <span class="me-auto">{{ $livre->note ?? '0' }}</span>
                                     </div>
                                 </div>
                             </div>

@@ -1,3 +1,12 @@
+<style>
+    .form-check input:hover{
+        cursor: pointer;
+    }
+    .cat:hover{
+        background-color: aquamarine;
+        cursor: pointer;
+    }
+</style>
 @extends('layouts.user')
 
 @section('content')
@@ -7,7 +16,7 @@
         @csrf
         <div class="row row-cols-2 row-cols-md-4 g-3">
             @foreach ($categories as $categorie)
-                <div class="col">
+                <div class="col cat">
                     <div class="form-check border rounded p-3 shadow-sm">
                         <input class="form-check-input" type="checkbox" name="categories[]" value="{{ $categorie->id }}" id="cat{{ $categorie->id }}">
                         <label class="form-check-label" for="cat{{ $categorie->id }}">

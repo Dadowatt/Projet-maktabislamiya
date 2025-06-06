@@ -23,7 +23,7 @@
                         </div>
                         <div class="text-center">
                             <a href="{{ route('user.livres.lecture', $livre->id) }}" target="_blank" class="btn btn-success me-3 mt-2">
-                            <i class="fas fa-book-open me-2"></i>Reprendre</a>
+                            <i class="fas fa-book-open me-2"></i>Lecture</a>
                         </div>
                         </div>
                     </div>

@@ -30,7 +30,7 @@ public function auteursSuivis()
 {
     $livres = Livre::with('auteur')->latest()->get();
     $livresRecents = Livre::latest()->take(3)->get();
-    $topAuteurs = Auteur::take(3)->get();
+    $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
     $auteurs = Auteur::withCount('followers')->get();
     $categories = Categorie::all();
     $auteurs = auth()->user()->auteurSuivis()->withCount('followers')->get();
@@ -40,10 +40,10 @@ public function auteursSuivis()
      public function index()
     {
         $livres = Livre::with(['auteur', 'notes'])->latest()->get();
-        $topAuteurs = Auteur::take(3)->get();
+        $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
+        $auteurs = Auteur::withCount(['followers', 'livres'])->get();
         $categories = Categorie::all();
         $livresRecents = Livre::latest()->take(3)->get();
-        $auteurs = Auteur::withCount(['followers', 'livres'])->get();
         $user = auth()->user();
         return view('user.auteurs.index', compact('auteurs', 'user','livres', 'livresRecents', 'topAuteurs', 'categories'));
 
@@ -71,9 +71,9 @@ public function auteursSuivis()
     public function show(string $id)
     {
         $auteur = Auteur::with('livres')->withCount('followers')->findOrFail($id);
-       $user = auth()->user()->load('auteurSuivis');
-       $livresRecents = Livre::latest()->take(3)->get();
-        $topAuteurs = Auteur::take(3)->get();
+        $user = auth()->user()->load('auteurSuivis');
+        $livresRecents = Livre::latest()->take(3)->get();
+        $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
 
     return view('user.auteurs.show', compact('auteur', 'user', 'livresRecents', 'topAuteurs'));
     }

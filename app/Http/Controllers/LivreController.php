@@ -39,7 +39,7 @@ class LivreController extends Controller
         'auteur_id' => 'required|exists:auteurs,id',
         'categorie_id' => 'required|exists:categories,id',
         'image_couverture' => 'nullable|image|mimes:jpeg,png,webp,jpg,gif|max:2048',
-        'pdf_url' => 'nullable|mimes:pdf|max:10000',
+        'pdf_url' => 'nullable|mimes:pdf|max:30000',
     ]);
 
     // Création d'une nouvelle instance de Livre
@@ -95,7 +95,7 @@ class LivreController extends Controller
         'auteur_id' => 'required|exists:auteurs,id',
         'categorie_id' => 'required|exists:categories,id',
         'image_couverture' => 'nullable|image|mimes:jpeg,png,webp,jpg,gif|max:2048',
-        'pdf_url' => 'nullable|mimes:pdf|max:10000',
+        'pdf_url' => 'nullable|mimes:pdf|max:30000',
     ]);
 
     // Mise à jour des champs

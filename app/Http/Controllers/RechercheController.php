@@ -15,7 +15,7 @@ class RechercheController extends Controller
     public function index(Request $request)
     {
          $livres = Livre::with(['auteur', 'notes'])->latest()->get();
-         $topAuteurs = Auteur::take(3)->get();
+         $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
          $auteurs = Auteur::withCount('followers')->get();
          $categories = Categorie::all();
          $livresRecents = Livre::latest()->take(3)->get();

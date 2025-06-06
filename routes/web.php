@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuteurController;
 use App\Http\Controllers\AuteurUserController;
+use App\Http\Controllers\BookRequestController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CategorieUserController;
 use App\Http\Controllers\FavorisController;
@@ -33,7 +34,10 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::resource('/livres', LivreController::class);
     Route::resource('/auteurs', AuteurController::class);
-    Route::resource('/categories', CategorieController::class)->parameters(['categories' => 'categorie']);;
+    Route::resource('/categories', CategorieController::class)->parameters(['categories' => 'categorie']);
+    Route::get('/demande_livre', [BookRequestController::class, 'index'])->name('demande_livre.index');
+    Route::get('/demande_livre/{id}', [BookRequestController::class, 'show'])->name('demande_livre.show');
+    Route::delete('/demande_livre/{id}', [BookRequestController::class, 'destroy'])->name('demande_livre.destroy');
 });
 
 // Utilisateur
@@ -57,7 +61,8 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::get('/themes-choisi', [CategorieUserController::class, 'themesChoisi'])->name('themes');
     Route::delete('/themes/{categorie}', [CategorieUserController::class, 'retirerTheme'])->name('themes.retirer');
     Route::get('/recherche', [RechercheController::class, 'index'])->name('recherche');
-
+    Route::get('/demande_livre', [BookRequestController::class, 'create'])->name('demande_livre.create');
+    Route::post('/demande_livre', [BookRequestController::class, 'store'])->name('demande_livre.store');
 });
 
 require __DIR__.'/auth.php';

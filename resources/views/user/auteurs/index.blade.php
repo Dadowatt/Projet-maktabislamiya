@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-<div class="container mt-4">
+<div class="container">
     <h3 class="text-success mb-4">Tous les Auteurs</h3>
     <div class="row">
         @forelse($auteurs as $auteur)

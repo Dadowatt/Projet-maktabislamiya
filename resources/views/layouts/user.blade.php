@@ -16,35 +16,35 @@
             overflow-y: auto;
         }
         .rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
-}
-.rating input[type="radio"] {
-    display: none;
-}
-.rating label {
-    cursor: pointer;
-    font-size: 2rem;
-    color: #ccc;
-    transition: color 0.2s;
-}
-.rating label:hover,
-.rating label:hover ~ label,
-.rating input:checked ~ label {
-    color: #ffc107 !important;
-}
+            flex-direction: row-reverse;
+            justify-content: flex-start;
+            display: flex;
+        }
+        .rating input[type="radio"] {
+            display: none;
+        }
+        .rating label {
+            font-size: 2rem;
+            color: #ccc;
+            transition: color 0.2s;
+            cursor: pointer;
+        }
+        .rating label:hover ~ label,
+        .rating label:hover,
+        .rating input:checked ~ label {
+            color: #ffc107 !important;
+        }
 
     </style>
 </head>
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light* bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     @php
     $adoration = \App\Models\Categorie::where('nom', 'Adoration')->first();
     $apprentissage = \App\Models\Categorie::where('nom', 'Apprentissage')->first();
     $comportement = \App\Models\Categorie::where('nom', 'Comportement')->first();
-@endphp
+    @endphp
     <div class="container-fluid">
         <a class="navbar-brand fw-bold" href="{{ route('user.home') }}">Maktaba.<span class="text-success">islam</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -53,60 +53,70 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-3">
                 <li class="nav-item me-3"><a class="nav-link active" href="{{ route('user.home') }}">Accueil</a></li>
-
                 @if($adoration)
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}"><span><i class="bi bi-heart-fill text-success me-1"></i></span>Adoration</a>
-</li>
-@endif
+                <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}">
+                <i class="bi bi-heart-fill text-success me-1"></i>Adoration</a>
+                <li class="nav-item">
+                </li>
+                @endif
                 @if($apprentissage)
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}"><i class="bi bi-mortarboard-fill me-2 text-success"></i>Apprentissage</a>
-</li>
-@endif
-            @if($comportement)
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}"><i class="bi bi-people-fill me-2 text-success"></i>Comportement</a>
-</li>
-@endif
+            <li class="nav-item">
+            <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}">
+            <i class="bi bi-mortarboard-fill me-2 text-success"></i>Apprentissage</a>
+            </li>
+               @endif
+               @if($comportement)
+               <li class="nav-item">
+               <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}">
+               <i class="bi bi-people-fill me-2 text-success"></i>Comportement</a>
+            </li>
+               @endif
             </ul>
-    <form class="d-flex ms-auto" action="{{ route('user.recherche') }}" method="GET">
-    <input class="form-control me-2" type="search" name="q" placeholder="Trier par..." aria-label="Search" required>
-    <select class="form-select me-2" name="type" style="width: auto;">
+        <form class="d-flex ms-auto" action="{{ route('user.recherche') }}" method="GET">
+        <input class="form-control me-2" type="search" name="q" placeholder="Trier par..." aria-label="Search" required>
+        <select class="form-select me-2" name="type" style="width: auto;">
         <option value="livre" selected>Livre</option>
         <option value="auteur">Auteur</option>
         <option value="categorie">Catégorie</option>
-    </select>
-    
-    <button class="btn btn-success" type="submit">Chercher</button>
-</form>
+        </select>
+        <button class="btn btn-success" type="submit">Chercher</button>
+        </form>
         </div>
-    </div>
+        </div>
 </nav>
 
 <div class="container-fluid mt-3">
     <div class="row">
         <!-- Sidebar gauche -->
         <div class="col-md-2">
-            <div class="list-group mb-3">
-                <h6 class="text-success fw-bold mb-2">Catégorie</h6>
+            <div class="list-group mb-3 mt-2">
+                <h6 class="text-success fw-bold mb-3">Catégorie</h6>
                 <div class="list-group mb-3">
-                    <a href="{{ route('user.auteurs.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-person me-2"></i> Auteurs</a>
-                    <a href="{{ route('user.livres') }}" class="list-group-item list-group-item-action"><i class="bi bi-journal-bookmark me-2"></i> Livres</a>
-                    <a href="{{ route('user.categories.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-tags me-2"></i> Catégories</a>
+                    <a href="{{ route('user.auteurs.index') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-workspace me-2"></i> Auteurs</a>
+                    <a href="{{ route('user.livres') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-journal-bookmark me-2"></i> Livres</a>
+                    <a href="{{ route('user.categories.index') }}" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-layer-group me-2 text-info"></i> Catégories</a>
                 </div>
                 <h6 class="text-success fw-bold mb-3">Bibliothèque</h6>
                 <div class="list-group mb-3">
-                    <a href="{{ route('user.lectures.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-list-check me-2"></i> Liste De Lecture</a>
-                    <a href="{{ route('user.auteurs.auteurs-suivi') }}" class="list-group-item list-group-item-action"><i class="bi bi-person-badge me-2"></i> Mes Auteurs</a>
-                     <a href="{{ route('user.favoris.index') }}" class="list-group-item list-group-item-action"><i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris</a>
+                    <a href="{{ route('user.lectures.index') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-journal-text me-2"></i> Liste De Lecture</a>
+                    <a href="{{ route('user.auteurs.auteurs-suivi') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-person-heart me-2 text-primary"></i> Mes Auteurs</a>
+                    <a href="{{ route('user.favoris.index') }}" class="list-group-item list-group-item-action">
+                        <i class="bi bi-heart-fill text-danger me-2"></i> Mes Favoris</a>
                 </div>
                 <h6 class="text-success fw-bold mb-3">Activité</h6>
-                <div class="list-group">
-                    <a href="{{ route('user.themes') }}" class="list-group-item list-group-item-action"><i class="bi bi-bookmark-check me-2"></i> Thèmes choisi</a>
-                    <a href="#" class="list-group-item list-group-item-action"><i class="bi bi-person-circle me-2"></i> Profile</a>
-                    <a href="#" class="list-group-item list-group-item-action" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
+                <div class="list-group mb-3">
+                    <a href="{{ route('user.themes') }}" class="list-group-item list-group-item-action">
+                        <i class="fas fa-swatchbook me-2"></i> Thèmes choisi</a>
+                    <a href="{{ route('user.demande_livre.create') }}" class="list-group-item list-group-item-action">
+                        <i class="fa-solid fa-book-quran me-2"></i> Demande de Livre</a>
+                    <a href="#" class="list-group-item list-group-item-action"
+                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="bi bi-box-arrow-left me-2"></i> Déconnexion
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
@@ -138,17 +148,19 @@
 <!-- Sidebar droite -->
 <div class="col-md-2 mb-3">
     <div>
-        <h6 class="fw-bold text-success">Derniers livres publiés</h6>
+        <h6 class="fw-bold text-success mt-2 mb-2">Derniers livres publiés</h6>
         @foreach($livresRecents as $livre)
-            <div class="card mb-2">
+            <div class="card mb-2 shadow">
                 <div class="row g-0">
                     <div class="col-4">
-                        <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}" class="img-fluid rounded-start" alt="Couverture">
+                        <img src="{{ $livre->image_couverture ? asset('storage/'.$livre->image_couverture) : asset('default-cover.jpg') }}" 
+                        class="img-fluid rounded-start shadow" alt="Couverture">
                     </div>
                     <div class="col-8">
                         <div class="card-body py-2 px-2">
                             <h6 class="card-title mb-1" style="font-size: 0.95rem;">{{ $livre->titre }}</h6>
-                            <a href="{{ route('user.livres.show', $livre->id) }}" class="btn btn-success btn-sm py-0 px-2" style="font-size: 0.85rem;">consulter</a>
+                            <a href="{{ route('user.livres.show', $livre->id) }}" 
+                            class="btn btn-success btn-sm py-0 px-2" style="font-size: 0.85rem;">consulter</a>
                         </div>
                     </div>
                 </div>
@@ -176,7 +188,7 @@
     </div>
 </div>
 
-<footer class="bg-light text-dark pt-5 pb-4">
+<footer class=" bg-dark text-light pt-5 pb-4">
   <div class="container text-md-left">
     <div class="row">
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-4">
@@ -197,16 +209,16 @@
 
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold mb-4">Services</h6>
-        <p><a href="#" class="text-dark">À propos de nous</a></p>
-        <p><a href="#" class="text-dark">Mon Compte</a></p>
-        <p><a href="#" class="text-dark">Nous contacter</a></p>
+        <p><a href="#" class="text-light">À propos de nous</a></p>
+        <p><a href="#" class="text-light">Mon Compte</a></p>
+        <p><a href="#" class="text-light">Nous contacter</a></p>
       </div>
 
       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
         <h6 class="text-uppercase fw-bold mb-4">Informations légales</h6>
-        <p><a href="#" class="text-dark">Politique de confidentialité</a></p>
-        <p><a href="#" class="text-dark">Conditions générales d'utilisation</a></p>
-        <p><a href="#" class="text-dark"> FAQ</a></p>
+        <p><a href="#" class="text-light">Politique de confidentialité</a></p>
+        <p><a href="#" class="text-light">Conditions générales d'utilisation</a></p>
+        <p><a href="#" class="text-light"> FAQ</a></p>
       </div>
 
       <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

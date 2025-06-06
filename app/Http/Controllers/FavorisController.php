@@ -15,8 +15,8 @@ class FavorisController extends Controller
     public function index()
     {
         $favoris = auth()->user()->favoris()->with('livre.auteur', 'livre.notes')->get()->pluck('livre');
-         $livresRecents = Livre::latest()->take(3)->get();
-         $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
+        $livresRecents = Livre::latest()->take(3)->get();
+        $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
         return view('user.favoris.index', compact('favoris', 'livresRecents', 'topAuteurs'));
     }
 

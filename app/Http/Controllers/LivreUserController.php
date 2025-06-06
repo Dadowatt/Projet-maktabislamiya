@@ -48,7 +48,6 @@ class LivreUserController extends Controller
     {
         $livre = Livre::with(['auteur', 'categorie', 'notes'])->findOrFail($id);
         $user = auth()->user();
-
         $notes = $livre->notes;
         $nbAvis = $notes->count();
         $noteMoyenne = $notes->avg('valeur') ?? 0;
@@ -57,9 +56,9 @@ class LivreUserController extends Controller
         $categories = $user->categories()->with('livres.auteur')->get();
         $livresRecents = Livre::latest()->take(3)->get();
         $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
-
+        $auteurs = Auteur::withCount(['followers', 'livres'])->get();
         return view('user.livres.detail_livre', compact(
-            'livre', 'noteMoyenne', 'nbAvis', 'userNote', 'estFavori', 'livresRecents', 'topAuteurs', 'categories'
+            'livre', 'noteMoyenne', 'nbAvis', 'userNote', 'auteurs', 'estFavori', 'livresRecents', 'topAuteurs', 'categories'
         ));
     }
 

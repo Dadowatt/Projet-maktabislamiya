@@ -95,9 +95,9 @@
 
             <!-- Sidebar Message -->
 <div class="sidebar-card d-none d-lg-flex">
-    <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_profile.svg') }}" alt="Livres">
+    <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_rocket.svg') }}" alt="Livres">
     <p class="text-center mb-2"><strong>Bienvenue dans votre bibliothèque numérique !</strong><br>Ajoutez, gérez et partagez des livres facilement.</p>
-    <a class="btn btn-primary btn-sm" href="{{ route('admin.livres.index') }}">Voir les livres</a>
+    <a class="btn btn-primary btn-sm" href="{{ route('admin.demande_livre.index') }}">Voir les demandes</a>
 </div>
 
 
@@ -120,7 +120,7 @@
 
 <!-- Titre ou logo -->
 <span class="navbar-brand font-weight-bold text-primary ml-3 d-none d-lg-inline">
-    📚 Maktaba Islam Admin
+    Maktaba Islam Admin
 </span>
 
 <!-- Espace vide pour équilibre -->

@@ -1,5 +1,4 @@
 @extends('layouts.user')
-
 @section('content')
     <a href="{{ route('user.home') }}" class="text-success fs-3"><i class="bi bi-arrow-left-circle"></i></a>
     <h4 class="text-muted mb-2">Details du livre:</h4>
