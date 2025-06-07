@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: library-project
+    env: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_KEY
+        fromSecret: app_key
+      - key: DB_CONNECTION
+        value: sqlite
+      - key: DB_DATABASE
+        value: database/database.sqlite
