@@ -1,3 +1,5 @@
+FROM composer:latest AS composer
+
 FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
@@ -13,7 +15,7 @@ RUN chown -R www-data:www-data /var/www/html \
 
 WORKDIR /var/www/html
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
