@@ -1,8 +1,8 @@
 services:
   - type: web
-    name: library-project
+    name: maktabislamiya
     runtime: docker
-    repo: https://github.com/Dadowatt/library-project
+    repo: https://github.com/Dadowatt/Projet-maktabislamiya
     branch: main
     plan: free
     dockerfilePath: ./Dockerfile
@@ -10,13 +10,13 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        sync: false
+        generateValue: true
       - key: APP_DEBUG
         value: false
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
-        value: dpg-d128sijuibrs73evpg8g-a
+        value: dpg-d128sijuibrs73evpg8g-a.oregon-postgres.render.com
       - key: DB_PORT
         value: 5432
       - key: DB_DATABASE
@@ -25,3 +25,7 @@ services:
         value: watt123
       - key: DB_PASSWORD
         value: KCK30b62wE9Vh5tr7xTJ8Xa4IGc56TXj
+    startCommand: |
+      php artisan config:cache &&
+      php artisan migrate --force &&
+      apache2-foreground
