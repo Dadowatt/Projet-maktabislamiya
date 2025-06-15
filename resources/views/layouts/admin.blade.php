@@ -10,7 +10,8 @@
     <title>Maktaba Islam</title>
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
@@ -20,9 +21,10 @@
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="{{ route('admin.dashboard') }}">
                 <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-quran"></i>
+                    <i class="fas fa-quran"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Bibliothèque</div>
             </a>
@@ -36,10 +38,10 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-            
+
             <!-- Heading -->
             <div class="sidebar-heading">
-            Gestion
+                Gestion
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -49,14 +51,15 @@
                     <i class="fas fa-fw fa-book"></i>
                     <span>Bibliothèque</span>
                 </a>
-                <div id="collapseLivres" class="collapse" aria-labelledby="headingLivres" data-parent="#accordionSidebar">
-             <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Gestion de contenu :</h6>
-            <a class="collapse-item" href="{{ route('admin.livres.index') }}">Livres</a>
-            <a class="collapse-item" href="{{ route('admin.auteurs.index') }}">Auteurs</a>
-            <a class="collapse-item" href="{{ route('admin.categories.index') }}">Catégories</a>
-            </div>
-             </div>
+                <div id="collapseLivres" class="collapse" aria-labelledby="headingLivres"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Gestion de contenu :</h6>
+                        <a class="collapse-item" href="{{ route('admin.livres.index') }}">Livres</a>
+                        <a class="collapse-item" href="{{ route('admin.auteurs.index') }}">Auteurs</a>
+                        <a class="collapse-item" href="{{ route('admin.categories.index') }}">Catégories</a>
+                    </div>
+                </div>
 
             </li>
 
@@ -94,11 +97,12 @@
             </div>
 
             <!-- Sidebar Message -->
-<div class="sidebar-card d-none d-lg-flex">
-    <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_rocket.svg') }}" alt="Livres">
-    <p class="text-center mb-2"><strong>Bienvenue dans votre bibliothèque numérique !</strong><br>Ajoutez, gérez et partagez des livres facilement.</p>
-    <a class="btn btn-primary btn-sm" href="{{ route('admin.demande_livre.index') }}">Voir les demandes</a>
-</div>
+            <div class="sidebar-card d-none d-lg-flex">
+                <img class="sidebar-card-illustration mb-2" src="{{ asset('img/undraw_rocket.svg') }}" alt="Livres">
+                <p class="text-center mb-2"><strong>Bienvenue dans votre bibliothèque numérique !</strong><br>Ajoutez,
+                    gérez et partagez des livres facilement.</p>
+                <a class="btn btn-primary btn-sm" href="{{ route('admin.demande_livre.index') }}">Voir les demandes</a>
+            </div>
 
 
         </ul>
@@ -111,54 +115,53 @@
             <div id="content">
 
                 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-<!-- Bouton burger (menu sidebar) -->
-<button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-    <i class="fa fa-bars"></i>
-</button>
+                    <!-- Bouton burger (menu sidebar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
-<!-- Titre ou logo -->
-<span class="navbar-brand font-weight-bold text-primary ml-3 d-none d-lg-inline">
-    Maktaba Islam Admin
-</span>
+                    <!-- Titre ou logo -->
+                    <span class="navbar-brand font-weight-bold text-primary ml-3 d-none d-lg-inline">
+                        Maktaba Islam Admin
+                    </span>
 
-<!-- Espace vide pour équilibre -->
-<div class="ml-auto"></div>
+                    <!-- Espace vide pour équilibre -->
+                    <div class="ml-auto"></div>
 
-<!-- Menu utilisateur à droite -->
-<ul class="navbar-nav">
+                    <!-- Menu utilisateur à droite -->
+                    <ul class="navbar-nav">
 
-    <!-- Utilisateur connecté -->
-    <li class="nav-item dropdown no-arrow">
-        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bienvenue Admin</span>
-            <img class="img-profile rounded-circle"
-                src="{{ asset('img/log.jpg') }}" width="40" height="40">
-        </a>
+                        <!-- Utilisateur connecté -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Bienvenue Admin</span>
+                                <img class="img-profile rounded-circle" src="{{ asset('img/log.jpg') }}" width="40"
+                                    height="40">
+                            </a>
 
-        <!-- Dropdown - User -->
-        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-            aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
-                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                Mon profil
-            </a>
-            <div class="dropdown-divider"></div>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Se déconnecter
-            </a>
-            </form>
-        </div>
-    </li>
-            
-</ul>
+                            <!-- Dropdown - User -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Mon profil
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Se déconnecter
+                                    </a>
+                                </form>
+                            </div>
+                        </li>
 
-</nav>
+                    </ul>
+                </nav>
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -205,13 +208,14 @@
                         <span aria-hidden="true">x</span>
                     </button>
                 </div>
-                <div class="modal-body">Sélectionnez « Se déconnecter » ci-dessous si vous êtes prêt(e) à mettre fin à votre session actuelle.</div>
+                <div class="modal-body">Sélectionnez « Se déconnecter » ci-dessous si vous êtes prêt(e) à mettre fin à
+                    votre session actuelle.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                     <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-danger" type="submit">Déconnexion</button>
-            </form>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Déconnexion</button>
+                    </form>
                 </div>
             </div>
         </div>

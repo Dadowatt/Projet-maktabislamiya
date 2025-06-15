@@ -19,7 +19,7 @@ class Auteur extends Model
         return $this->hasMany(AuteurSuivi::class);
     }
     public function followers()
-{
-    return $this->belongsToMany(User::class, 'auteur_suivis', 'auteur_id', 'user_id');
-}
+    {
+        return $this->belongsToMany(User::class, 'auteur_suivis', 'auteur_id', 'user_id');
+    }
 }

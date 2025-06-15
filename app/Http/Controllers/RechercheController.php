@@ -14,41 +14,40 @@ class RechercheController extends Controller
      */
     public function index(Request $request)
     {
-         $livres = Livre::with(['auteur', 'notes'])->latest()->get();
-         $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
-         $auteurs = Auteur::withCount('followers')->get();
-         $categories = Categorie::all();
-         $livresRecents = Livre::latest()->take(3)->get();
-
+        $livres = Livre::with(['auteur', 'notes'])->latest()->get();
+        $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
+        $auteurs = Auteur::withCount('followers')->get();
+        $categories = Categorie::all();
+        $livresRecents = Livre::latest()->take(3)->get();
         $type = $request->input('type');
-       $query = $request->input('q');
+        $query = $request->input('q');
 
-    if ($type === 'livre') {
-        $livres = Livre::where('titre', 'like', "%{$query}%")
-            ->with(['auteur', 'notes'])
-            ->get();
+        if ($type === 'livre') {
+            $livres = Livre::where('titre', 'like', "%{$query}%")
+                ->with(['auteur', 'notes'])
+                ->get();
 
-        return view('user.recherche.livres', compact('livres', 'query', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
+            return view('user.recherche.livres', compact('livres', 'query', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
         } elseif ($type === 'auteur') {
-        $auteurs = Auteur::where('nom', 'like', "%{$query}%")
-            ->withCount(['followers', 'livres'])
-            ->get();
+            $auteurs = Auteur::where('nom', 'like', "%{$query}%")
+                ->withCount(['followers', 'livres'])
+                ->get();
 
-        return view('user.recherche.auteurs', compact('auteurs', 'query', 'livres', 'livresRecents', 'topAuteurs', 'categories'));
-    
-    } elseif ($type === 'categorie') {
-    $categories = Categorie::where('nom', 'like', "%{$query}%")->with(['livres.auteur', 'livres.notes'])->get();
+            return view('user.recherche.auteurs', compact('auteurs', 'query', 'livres', 'livresRecents', 'topAuteurs', 'categories'));
 
-    // Regrouper les livres par nom de catégorie
-    $livres = [];
-    foreach ($categories as $categorie) {
-        $livres[$categorie->nom] = $categorie->livres;
-    }
+        } elseif ($type === 'categorie') {
+            $categories = Categorie::where('nom', 'like', "%{$query}%")->with(['livres.auteur', 'livres.notes'])->get();
 
-    return view('user.recherche.categorie', compact('livres', 'query', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
-} else {
-        return redirect()->back()->with('error', 'Type de recherche invalide.');
-    }
+            // Regrouper les livres par nom de catégorie
+            $livres = [];
+            foreach ($categories as $categorie) {
+                $livres[$categorie->nom] = $categorie->livres;
+            }
+
+            return view('user.recherche.categorie', compact('livres', 'query', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
+        } else {
+            return redirect()->back()->with('error', 'Type de recherche invalide.');
+        }
     }
 
     /**

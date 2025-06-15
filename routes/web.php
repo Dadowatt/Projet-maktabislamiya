@@ -3,16 +3,15 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuteurController;
 use App\Http\Controllers\AuteurUserController;
-use App\Http\Controllers\BookRequestController;
 use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\CategorieUserController;
+use App\Http\Controllers\DemandeLivreController;
 use App\Http\Controllers\FavorisController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\LivreController;
 use App\Http\Controllers\LivreUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RechercheController;
-use App\Http\Controllers\ThemeUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +19,6 @@ Route::get('/', function () {
     // return view('welcome');
     return redirect()->route('register');
 });
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -31,14 +29,14 @@ Route::middleware('auth')->group(function () {
 // Admin
 Route::middleware(['auth', 'is_admin'])->prefix('admin')
     ->name('admin.')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::resource('/livres', LivreController::class);
-    Route::resource('/auteurs', AuteurController::class);
-    Route::resource('/categories', CategorieController::class)->parameters(['categories' => 'categorie']);
-    Route::get('/demande_livre', [BookRequestController::class, 'index'])->name('demande_livre.index');
-    Route::get('/demande_livre/{id}', [BookRequestController::class, 'show'])->name('demande_livre.show');
-    Route::delete('/demande_livre/{id}', [BookRequestController::class, 'destroy'])->name('demande_livre.destroy');
-});
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::resource('/livres', LivreController::class);
+        Route::resource('/auteurs', AuteurController::class);
+        Route::resource('/categories', CategorieController::class)->parameters(['categories' => 'categorie']);
+        Route::get('/demande_livre', [DemandeLivreController::class, 'index'])->name('demande_livre.index');
+        Route::get('/demande_livre/{id}', [DemandeLivreController::class, 'show'])->name('demande_livre.show');
+        Route::delete('/demande_livre/{id}', [DemandeLivreController::class, 'destroy'])->name('demande_livre.destroy');
+    });
 
 // Utilisateur
 Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(function () {
@@ -61,8 +59,8 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::get('/themes-choisi', [CategorieUserController::class, 'themesChoisi'])->name('themes');
     Route::delete('/themes/{categorie}', [CategorieUserController::class, 'retirerTheme'])->name('themes.retirer');
     Route::get('/recherche', [RechercheController::class, 'index'])->name('recherche');
-    Route::get('/demande_livre', [BookRequestController::class, 'create'])->name('demande_livre.create');
-    Route::post('/demande_livre', [BookRequestController::class, 'store'])->name('demande_livre.store');
+    Route::get('/demande_livre', [DemandeLivreController::class, 'create'])->name('demande_livre.create');
+    Route::post('/demande_livre', [DemandeLivreController::class, 'store'])->name('demande_livre.store');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

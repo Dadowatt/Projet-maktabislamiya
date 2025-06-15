@@ -30,21 +30,21 @@ class AuteurController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'nom' => 'required|string|max:255',
-        'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048'
-    ]);
+            'nom' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048'
+        ]);
 
-    $photoPath = null;
-    if ($request->hasFile('photo')) {
-        $photoPath = $request->file('photo')->store('auteurs', 'public');
-    }
+        $photoPath = null;
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('auteurs', 'public');
+        }
 
-    Auteur::create([
-        'nom' => $request->nom,
-        'photo' => $photoPath,
-    ]);
+        Auteur::create([
+            'nom' => $request->nom,
+            'photo' => $photoPath,
+        ]);
 
-    return redirect()->route('admin.auteurs.index')->with('success', 'Auteur ajouté avec succès.');
+        return redirect()->route('admin.auteurs.index')->with('success', 'Auteur ajouté avec succès.');
     }
 
     /**

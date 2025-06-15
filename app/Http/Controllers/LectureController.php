@@ -14,27 +14,27 @@ class LectureController extends Controller
      * Display a listing of the resource.
      */
     public function lire($id)
-{
-    $livre = Livre::findOrFail($id);
-    $user = auth()->user();
+    {
+        $livre = Livre::findOrFail($id);
+        $user = auth()->user();
 
-    // Enregistrer la lecture s’il n’existe pas déjà
-    $user->lectures()->syncWithoutDetaching([$livre->id]);
+        // Enregistrer la lecture s’il n’existe pas déjà
+        $user->lectures()->syncWithoutDetaching([$livre->id]);
 
-    // Rediriger vers le PDF
-    return redirect(asset('storage/' . $livre->pdf_url));
-}
-     public function index()
-{
-    $user = auth()->user();
-    $lectures = $user->lectures()->with('auteur')->get();
-    $livres = Livre::with('auteur')->latest()->get();
-    $livresRecents = Livre::latest()->take(3)->get();
-    $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
-    $auteurs = Auteur::withCount(['followers', 'livres'])->get();
-    $categories = Categorie::all();
-    return view('user.lectures.index', compact('lectures','livres', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
-}
+        // Rediriger vers le PDF
+        return redirect(asset('storage/' . $livre->pdf_url));
+    }
+    public function index()
+    {
+        $user = auth()->user();
+        $lectures = $user->lectures()->with('auteur')->get();
+        $livres = Livre::with('auteur')->latest()->get();
+        $livresRecents = Livre::latest()->take(3)->get();
+        $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
+        $auteurs = Auteur::withCount(['followers', 'livres'])->get();
+        $categories = Categorie::all();
+        return view('user.lectures.index', compact('lectures', 'livres', 'livresRecents', 'topAuteurs', 'categories', 'auteurs'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -52,11 +52,11 @@ class LectureController extends Controller
         $livre = Livre::findOrFail($id);
         $user = Auth::user();
 
-    if (!$user->lectures->contains($livre->id)) {
-        $user->lectures()->attach($livre->id);
-    }
+        if (!$user->lectures->contains($livre->id)) {
+            $user->lectures()->attach($livre->id);
+        }
 
-    return redirect()->to(asset('storage/'.$livre->pdf_url));
+        return redirect()->to(asset('storage/' . $livre->pdf_url));
     }
 
     /**

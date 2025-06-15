@@ -30,14 +30,14 @@ class CategorieController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'nom' => 'required|string|max:255',
-    ]);
+            'nom' => 'required|string|max:255',
+        ]);
 
-    Categorie::create([
-        'nom' => $request->nom,
-    ]);
+        Categorie::create([
+            'nom' => $request->nom,
+        ]);
 
-    return redirect()->route('admin.categories.index')->with('success', 'Catégorie ajoutée avec succès.');
+        return redirect()->route('admin.categories.index')->with('success', 'Catégorie ajoutée avec succès.');
     }
 
     /**
@@ -45,9 +45,9 @@ class CategorieController extends Controller
      */
     public function show(Categorie $categorie, $id)
     {
-         $categorie = Categorie::with(['livres.auteur', 'livres.notes'])->findOrFail($id);
+        $categorie = Categorie::with(['livres.auteur', 'livres.notes'])->findOrFail($id);
 
-    return view('user.categories.show', compact('categorie'));
+        return view('user.categories.show', compact('categorie'));
     }
 
     /**

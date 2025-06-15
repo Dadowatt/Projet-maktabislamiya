@@ -44,7 +44,7 @@ class LivreUserController extends Controller
     /**
      * Display the specified resource.
      */
-     public function show(string $id)
+    public function show(string $id)
     {
         $livre = Livre::with(['auteur', 'categorie', 'notes'])->findOrFail($id);
         $user = auth()->user();
@@ -58,7 +58,15 @@ class LivreUserController extends Controller
         $topAuteurs = Auteur::withCount('followers')->orderByDesc('followers_count')->take(3)->get();
         $auteurs = Auteur::withCount(['followers', 'livres'])->get();
         return view('user.livres.detail_livre', compact(
-            'livre', 'noteMoyenne', 'nbAvis', 'userNote', 'auteurs', 'estFavori', 'livresRecents', 'topAuteurs', 'categories'
+            'livre',
+            'noteMoyenne',
+            'nbAvis',
+            'userNote',
+            'auteurs',
+            'estFavori',
+            'livresRecents',
+            'topAuteurs',
+            'categories'
         ));
     }
 

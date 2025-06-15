@@ -25,33 +25,33 @@ class User extends Authenticatable
         'role',
     ];
 
-public function favoris()
-{
-    return $this->hasMany(Favoris::class);
-}
-public function notes()
-{
-    return $this->hasMany(Note::class);
-}
-public function lectures()
-{
-     return $this->belongsToMany(Livre::class, 'lectures');
-}
+    public function favoris()
+    {
+        return $this->hasMany(Favoris::class);
+    }
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+    public function lectures()
+    {
+        return $this->belongsToMany(Livre::class, 'lectures');
+    }
 
-public function commentaire()
-{
-    return $this->hasMany(Commentaire::class);
-}
+    public function commentaire()
+    {
+        return $this->hasMany(Commentaire::class);
+    }
 
-public function auteurSuivis()
-{
-    return $this->belongsToMany(Auteur::class, 'auteur_suivis', 'user_id', 'auteur_id');
-}
+    public function auteurSuivis()
+    {
+        return $this->belongsToMany(Auteur::class, 'auteur_suivis', 'user_id', 'auteur_id');
+    }
 
-public function categories()
-{
-    return $this->belongsToMany(Categorie::class, 'categorie_user'); 
-}
+    public function categories()
+    {
+        return $this->belongsToMany(Categorie::class, 'categorie_user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

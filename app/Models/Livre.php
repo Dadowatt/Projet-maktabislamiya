@@ -19,9 +19,10 @@ class Livre extends Model
     {
         return $this->belongsTo(Auteur::class);
     }
-   public function categorie() {
-    return $this->belongsTo(Categorie::class);
-}
+    public function categorie()
+    {
+        return $this->belongsTo(Categorie::class);
+    }
 
     public function commentaire()
     {

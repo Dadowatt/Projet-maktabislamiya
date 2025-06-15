@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BookRequest extends Model
+class DemandeLivre extends Model
 {
     protected $fillable = [
         'titre_livre',

@@ -35,17 +35,17 @@ class FavorisController extends Controller
     {
         $user = auth()->user();
 
-    $favori = $user->favoris()->where('livre_id', $id)->first();
+        $favori = $user->favoris()->where('livre_id', $id)->first();
 
-    if ($favori) {
-        // Si le livre est déjà en favori, on le retire
-        $favori->delete();
-        return back()->with('success', 'Livre retiré de vos favoris.');
-    } else {
-        // Sinon, on l’ajoute
-        $user->favoris()->create(['livre_id' => $id]);
-        return back()->with('success', 'Livre ajouté à vos favoris.');
-    }
+        if ($favori) {
+            // Si le livre est déjà en favori, on le retire
+            $favori->delete();
+            return back()->with('success', 'Livre retiré de vos favoris.');
+        } else {
+            // Sinon, on l’ajoute
+            $user->favoris()->create(['livre_id' => $id]);
+            return back()->with('success', 'Livre ajouté à vos favoris.');
+        }
     }
 
     /**
