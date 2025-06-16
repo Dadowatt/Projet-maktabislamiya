@@ -37,15 +37,21 @@ class DemandeLivreController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'titre_livre' => 'required|string|max:255',
             'nom_auteur' => 'nullable|string|max:255',
-            'user_name' => 'required|string|max:100',
-            'email' => 'required|email|max:255',
             'details' => 'nullable|string',
         ]);
 
-        DemandeLivre::create($validated);
+        $user = auth()->user();
+
+        DemandeLivre::create([
+            'titre_livre' => $request->titre_livre,
+            'nom_auteur' => $request->nom_auteur,
+            'user_name' => $user->nom ?? $user->name,
+            'email' => $user->email,
+            'details' => $request->details,
+        ]);
 
         return redirect()->back()->with('success', 'Votre demande a été envoyée avec succès.');
     }
