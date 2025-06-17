@@ -74,7 +74,7 @@
       @php
       $icons = [
       'Hajj & Umra' => 'fa-solid fa-kaaba',
-      'Comportement' => 'fas fa-flask',
+      'Comportement' => 'bi bi-people-fill',
       'Apprentissage' => 'fas fa-mosque',
       'Biographie' => 'fas fa-brain',
       'Adoration' => 'fa-solid fa-person-praying',
@@ -83,6 +83,7 @@
       'Mariage' => 'fas fa-landmark',
       'Invocation' => 'fa-solid fa-place-of-worship',
       'Jeûne & Zakat' => 'fa-solid fa-hand-holding-heart',
+      'Hadith' => 'fas fa-flask',
       ];
       $icon = $icons[$categorie->nom] ?? 'fas fa-book';
       @endphp

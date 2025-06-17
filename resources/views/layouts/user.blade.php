@@ -47,7 +47,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         @php
             $adoration = \App\Models\Categorie::where('nom', 'Adoration')->first();
             $apprentissage = \App\Models\Categorie::where('nom', 'Apprentissage')->first();
@@ -65,20 +65,20 @@
                     </li>
                     @if($adoration)
                         <a class="nav-link" href="{{ route('user.categories.show', $adoration->id) }}">
-                            <i class="bi bi-heart-fill text-success me-1"></i>Adoration</a>
+                            <i class="fa-solid fa-person-praying text-light me-1"></i>Adoration</a>
                         <li class="nav-item">
                         </li>
                     @endif
                     @if($apprentissage)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.categories.show', $apprentissage->id) }}">
-                                <i class="bi bi-mortarboard-fill me-2 text-success"></i>Apprentissage</a>
+                                <i class="bi bi-mortarboard-fill me-2 text-light"></i>Apprentissage</a>
                         </li>
                     @endif
                     @if($comportement)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('user.categories.show', $comportement->id) }}">
-                                <i class="bi bi-people-fill me-2 text-success"></i>Comportement</a>
+                                <i class="bi bi-people-fill me-2 text-light"></i>Comportement</a>
                         </li>
                     @endif
                 </ul>
@@ -208,7 +208,7 @@
                     <h5 class="text-uppercase fw-bold mb-4">
                         Maktaba Islam
                     </h5>
-                    <p>Maktaba Islam est une bibliothèque numérique islamique à but non
+                    <p style="text-align: justify;">Maktaba Islam est une bibliothèque numérique islamique à but non
                         lucratif conçue pour les musulman(e)s francophones afin de les
                         fournir un accès direct aux ressources d'information, numériques
                         et analogiques de la religion islamique.</p>
@@ -224,7 +224,7 @@
                     <h6 class="text-uppercase fw-bold mb-4">Services</h6>
                     <p><a href="#" class="text-light">À propos de nous</a></p>
                     <p><a href="#" class="text-light">Mon Compte</a></p>
-                    <p><a href="#" class="text-light">Nous contacter</a></p>
+                    <p><a href="{{ route('user.demande_livre.create') }}" class="text-light">Nous contacter</a></p>
                 </div>
 
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
