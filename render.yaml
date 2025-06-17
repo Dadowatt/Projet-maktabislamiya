@@ -1,20 +1,16 @@
 services:
   - type: web
     name: projet-maktabislamiya
-    runtime: node
+    env: php
     plan: free
     branch: main
-    buildCommand: |
-      composer install
-      php artisan key:generate
-      php artisan config:cache
-      php artisan migrate --force
-    startCommand: php artisan serve --host 0.0.0.0 --port 10000
+    buildCommand: composer install && php artisan migrate --force
+    startCommand: php artisan serve --host=0.0.0.0 --port=10000
     envVars:
       - key: APP_ENV
         value: production
       - key: APP_KEY
-        generateValue: true
+        value: base64:i8M1I3SajaVPd9Y+p+JjiNp9QiVR7O50CAX2AxV+ib8=
       - key: APP_DEBUG
         value: false
       - key: DB_CONNECTION
