@@ -1,11 +1,11 @@
 services:
   - type: web
     name: projet-maktabislamiya
-    env: docker
+    runtime: php
     plan: free
     branch: main
     buildCommand: |
-      composer install --no-interaction --prefer-dist --optimize-autoloader
+      composer install
       php artisan key:generate
       php artisan config:cache
       php artisan migrate --force
@@ -13,10 +13,10 @@ services:
     envVars:
       - key: APP_ENV
         value: production
+      - key: APP_KEY
+        generateValue: true
       - key: APP_DEBUG
         value: false
-      - key: APP_URL
-        value: https://projet-maktabislamiya.onrender.com
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
