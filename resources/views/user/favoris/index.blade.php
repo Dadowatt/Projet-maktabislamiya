@@ -1,8 +1,8 @@
 @extends('layouts.user')
 
 @section('content')
-    <h3 class="text-success mb-4">Mes livres favoris</h3>
-
+    <h3 class="text-success mb-2">Mes livres favoris</h3>
+    <hr>
     <div class="row">
         @forelse($favoris as $livre)
             <div class="col-12 col-sm-6 col-md-3 mb-4 mx-auto" style="max-width: 300px;">

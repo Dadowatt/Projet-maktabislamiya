@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h4 class="mb-4">Ma Liste de Lecture</h4>
+        <h4 class="mb-2 text-success">Ma Liste de Lecture</h4>
         <hr>
         @if($lectures->isEmpty())
             <p>Vous n'avez encore aucun livre dans votre liste de lecture.</p>

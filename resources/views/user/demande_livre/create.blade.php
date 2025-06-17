@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-  <form class="form-control bg-light mx-auto w-75" method="POST" action="{{ route('user.demande_livre.store') }}">
+  <form class="form-control bg-success-subtle mx-auto w-75 mt-5" method="POST" action="{{ route('user.demande_livre.store') }}">
     @csrf
 
     {{-- Affichage du nom et de l'email de l'utilisateur connecté --}}
@@ -26,7 +26,7 @@
     </div>
 
     <div class="text-center">
-    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="submit" class="btn btn-success">Envoyer</button>
     </div>
   </form>
 @endsection
