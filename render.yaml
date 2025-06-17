@@ -1,7 +1,7 @@
 services:
   - type: web
     name: projet-maktabislamiya
-    runtime: php
+    runtime: node
     plan: free
     branch: main
     buildCommand: |
