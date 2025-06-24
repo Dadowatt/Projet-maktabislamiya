@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="container">
-        <h3 class="text-success mb-4">Tous les Auteurs</h3>
+        <h3 class="text-success mb-2">Tous les Auteurs</h3>
+        <hr>
         <div class="row">
             @forelse($auteurs as $auteur)
                 <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-4">
