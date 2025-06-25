@@ -79,6 +79,22 @@ INSERT INTO `auteur_suivis` (`id`, `user_id`, `auteur_id`, `created_at`, `update
 (44, 7, 9, NULL, NULL);
 
 -- --------------------------------------------------------
+CREATE TABLE `book_requests` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `titre_livre` varchar(255) NOT NULL,
+  `nom_auteur` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `details` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `book_requests`
+  ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `book_requests`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Déchargement des données de la table `book_requests`
