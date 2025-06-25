@@ -245,30 +245,6 @@ INSERT INTO `livre_user` (`id`, `user_id`, `livre_id`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2025_05_24_120151_create_categories_table', 1),
-(5, '2025_05_24_120210_create_auteurs_table', 1),
-(6, '2025_05_24_120253_create_livres_table', 1),
-(7, '2025_05_24_121509_create_commentaires_table', 1),
-(8, '2025_05_24_121535_create_lectures_table', 1),
-(9, '2025_05_24_121559_create_favoris_table', 1),
-(10, '2025_05_24_121637_create_notes_table', 1),
-(11, '2025_05_24_121657_create_auteur_suivis_table', 1),
-(12, '2025_05_29_111959_add_unique_constraint_to_lectures_table', 1),
-(13, '2025_05_29_124935_create_categorie_user_table', 1),
-(14, '2025_05_29_152426_create_categorie_livre_table', 1),
-(15, '2025_05_29_170210_drop_categorie_livre_table', 1),
-(16, '2025_05_30_002816_alter_pdf_url_nullable_on_livres_table', 1),
-(17, '2025_06_03_215049_create_livre_user_table', 2),
-(18, '2025_06_06_174000_create_book_requests_table', 3),
-(19, '2025_06_06_174000_create_demande_livres_table', 4),
-(20, '2025_06_16_174427_remove_prenom_column_from_users_table', 5);
 
 -- --------------------------------------------------------
 
