@@ -79,6 +79,7 @@ INSERT INTO `auteur_suivis` (`id`, `user_id`, `auteur_id`, `created_at`, `update
 (44, 7, 9, NULL, NULL);
 
 -- --------------------------------------------------------
+DROP TABLE IF EXISTS `book_requests`;
 CREATE TABLE `book_requests` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `titre_livre` varchar(255) NOT NULL,
