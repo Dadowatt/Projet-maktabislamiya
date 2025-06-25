@@ -63,4 +63,20 @@ Route::middleware(['auth', 'is_user'])->prefix('user')->name('user.')->group(fun
     Route::post('/demande_livre', [DemandeLivreController::class, 'store'])->name('demande_livre.store');
 });
 
+Route::get('/import-bdd', function () {
+    $path = database_path('sql/dump.sql');
+
+    if (!File::exists($path)) {
+        return "Fichier SQL non trouvé.";
+    }
+
+    try {
+        $sql = File::get($path);
+        DB::unprepared($sql);
+        return "✅ Importation réussie.";
+    } catch (\Exception $e) {
+        return "❌ Erreur : " . $e->getMessage();
+    }
+});
+
 require __DIR__ . '/auth.php';
