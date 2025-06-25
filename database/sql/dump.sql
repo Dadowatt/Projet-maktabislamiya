@@ -22,7 +22,15 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
+-- Déchargement des données de la table `users`
+--
 
+INSERT INTO `users` (`id`, `nom`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Dado', 'dado@gmail.com', NULL, '$2y$12$1hSek7Ub.xJlBDh0/wPageQqCkFQbWS1amj1d2NfnD3SdVyzjvYYO', 'admin', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
+(2, 'User', 'user@gmail.com', NULL, '$2y$12$T4Rh7ksemhRvmII8C.h1POxIt3X/lGm/zrzoMgnVxMU787sD2RT1S', 'user', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
+(7, 'Mamy Niang', 'mamita@gmail.com', NULL, '$2y$12$M/FQr79nGX88oR3altCjMOcy7A/nsgNDHxcMIhG1iRpze7J4gRVIm', 'user', NULL, '2025-06-16 18:10:48', '2025-06-16 18:10:48'),
+(8, 'Omar Sarr', 'omzo@gmail.com', NULL, '$2y$12$.NclCMTUt4tcq0eTe8Z16OVpmqO8YBrxIt0gPXtlYK0SMP1fDHg..', 'user', NULL, '2025-06-16 18:16:52', '2025-06-16 18:16:52'),
+(9, 'Awa Diop', 'awa@gmail.com', NULL, '$2y$12$D.c0ZimVpVXr0sAoF93dfOfwC1i147WyWBtISZoRb4XfmQqn4lqPq', 'user', NULL, '2025-06-16 18:23:33', '2025-06-16 18:23:33');
 --
 -- Déchargement des données de la table `auteurs`
 --
@@ -291,15 +299,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `users`
---
 
-INSERT INTO `users` (`id`, `nom`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Dado', 'dado@gmail.com', NULL, '$2y$12$1hSek7Ub.xJlBDh0/wPageQqCkFQbWS1amj1d2NfnD3SdVyzjvYYO', 'admin', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
-(2, 'User', 'user@gmail.com', NULL, '$2y$12$T4Rh7ksemhRvmII8C.h1POxIt3X/lGm/zrzoMgnVxMU787sD2RT1S', 'user', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
-(7, 'Mamy Niang', 'mamita@gmail.com', NULL, '$2y$12$M/FQr79nGX88oR3altCjMOcy7A/nsgNDHxcMIhG1iRpze7J4gRVIm', 'user', NULL, '2025-06-16 18:10:48', '2025-06-16 18:10:48'),
-(8, 'Omar Sarr', 'omzo@gmail.com', NULL, '$2y$12$.NclCMTUt4tcq0eTe8Z16OVpmqO8YBrxIt0gPXtlYK0SMP1fDHg..', 'user', NULL, '2025-06-16 18:16:52', '2025-06-16 18:16:52'),
-(9, 'Awa Diop', 'awa@gmail.com', NULL, '$2y$12$D.c0ZimVpVXr0sAoF93dfOfwC1i147WyWBtISZoRb4XfmQqn4lqPq', 'user', NULL, '2025-06-16 18:23:33', '2025-06-16 18:23:33');
 
 --
 -- Index pour les tables déchargées
