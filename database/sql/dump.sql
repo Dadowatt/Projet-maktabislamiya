@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `maktabislamiya`
 --
-
+SET FOREIGN_KEY_CHECKS = 0;
 -- --------------------------------------------------------
 -- Déchargement des données de la table `users`
 --
@@ -299,7 +299,7 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 -- --------------------------------------------------------
 
 --
-
+SET FOREIGN_KEY_CHECKS = 1;
 
 --
 -- Index pour les tables déchargées
