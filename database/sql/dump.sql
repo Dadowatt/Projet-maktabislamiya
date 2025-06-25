@@ -24,18 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `auteurs`
---
-
-CREATE TABLE `auteurs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `photo` varchar(255) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `auteurs`
 --
 
@@ -54,18 +42,6 @@ INSERT INTO `auteurs` (`id`, `nom`, `photo`, `created_at`, `updated_at`) VALUES
 (12, 'Abdal Raḥmān ibn Zaydān', 'auteurs/aE3sI3yBTRNj5RkuxWREFelXI3SBkXrEDQVwCfo3.png', '2025-06-03 14:02:53', '2025-06-03 14:02:53');
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `auteur_suivis`
---
-
-CREATE TABLE `auteur_suivis` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `auteur_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `auteur_suivis`
@@ -97,21 +73,6 @@ INSERT INTO `auteur_suivis` (`id`, `user_id`, `auteur_id`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
--- Structure de la table `book_requests`
---
-
-CREATE TABLE `book_requests` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `titre_livre` varchar(255) NOT NULL,
-  `nom_auteur` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `details` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `book_requests`
 --
 
@@ -121,40 +82,7 @@ INSERT INTO `book_requests` (`id`, `titre_livre`, `nom_auteur`, `user_name`, `em
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `cache`
---
-
-CREATE TABLE `cache` (
-  `key` varchar(255) NOT NULL,
-  `value` mediumtext NOT NULL,
-  `expiration` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- --------------------------------------------------------
-
---
--- Structure de la table `cache_locks`
---
-
-CREATE TABLE `cache_locks` (
-  `key` varchar(255) NOT NULL,
-  `owner` varchar(255) NOT NULL,
-  `expiration` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `categories`
---
-
-CREATE TABLE `categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `categories`
@@ -177,18 +105,6 @@ INSERT INTO `categories` (`id`, `nom`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `categorie_user`
---
-
-CREATE TABLE `categorie_user` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `categorie_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `categorie_user`
 --
 
@@ -208,35 +124,7 @@ INSERT INTO `categorie_user` (`id`, `categorie_id`, `user_id`, `created_at`, `up
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `commentaires`
---
-
-CREATE TABLE `commentaires` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `contenu` text NOT NULL,
-  `livre_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- --------------------------------------------------------
-
---
--- Structure de la table `demande_livres`
---
-
-CREATE TABLE `demande_livres` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `titre_livre` varchar(255) NOT NULL,
-  `nom_auteur` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `details` text DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `demande_livres`
@@ -249,33 +137,7 @@ INSERT INTO `demande_livres` (`id`, `titre_livre`, `nom_auteur`, `user_name`, `e
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- --------------------------------------------------------
-
---
--- Structure de la table `favoris`
---
-
-CREATE TABLE `favoris` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `livre_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `favoris`
@@ -299,52 +161,12 @@ INSERT INTO `favoris` (`id`, `livre_id`, `user_id`, `created_at`, `updated_at`) 
 
 -- --------------------------------------------------------
 
---
--- Structure de la table `jobs`
---
-
-CREATE TABLE `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `queue` varchar(255) NOT NULL,
-  `payload` longtext NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `job_batches`
---
-
-CREATE TABLE `job_batches` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `total_jobs` int(11) NOT NULL,
-  `pending_jobs` int(11) NOT NULL,
-  `failed_jobs` int(11) NOT NULL,
-  `failed_job_ids` longtext NOT NULL,
-  `options` mediumtext DEFAULT NULL,
-  `cancelled_at` int(11) DEFAULT NULL,
-  `created_at` int(11) NOT NULL,
-  `finished_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `lectures`
---
-
-CREATE TABLE `lectures` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `livre_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `lectures`
@@ -369,22 +191,6 @@ INSERT INTO `lectures` (`id`, `livre_id`, `user_id`, `created_at`, `updated_at`)
 -- --------------------------------------------------------
 
 --
--- Structure de la table `livres`
---
-
-CREATE TABLE `livres` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `titre` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
-  `image_couverture` varchar(255) DEFAULT NULL,
-  `pdf_url` varchar(255) DEFAULT NULL,
-  `auteur_id` bigint(20) UNSIGNED NOT NULL,
-  `categorie_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `livres`
 --
 
@@ -403,18 +209,6 @@ INSERT INTO `livres` (`id`, `titre`, `description`, `image_couverture`, `pdf_url
 -- --------------------------------------------------------
 
 --
--- Structure de la table `livre_user`
---
-
-CREATE TABLE `livre_user` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `livre_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `livre_user`
 --
 
@@ -425,16 +219,6 @@ INSERT INTO `livre_user` (`id`, `user_id`, `livre_id`, `created_at`, `updated_at
 (4, 2, 5, NULL, NULL);
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `migrations`
@@ -465,19 +249,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `notes`
---
-
-CREATE TABLE `notes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `livre_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `valeur` tinyint(3) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `notes`
 --
 
@@ -502,36 +273,13 @@ INSERT INTO `notes` (`id`, `livre_id`, `user_id`, `valeur`, `created_at`, `updat
 -- --------------------------------------------------------
 
 --
--- Structure de la table `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `password_reset_tokens`
 --
 
 INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 ('awa@gmail.com', '$2y$12$7eea12Fic4pmS9p35Vamje73nHEBCHMW0JbTNAfzvMnSoI1oahXyK', '2025-05-31 23:07:55');
 
--- --------------------------------------------------------
-
---
--- Structure de la table `sessions`
---
-
-CREATE TABLE `sessions` (
-  `id` varchar(255) NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) DEFAULT NULL,
-  `user_agent` text DEFAULT NULL,
-  `payload` longtext NOT NULL,
-  `last_activity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- -------------------------------------------------------
 
 --
 -- Déchargement des données de la table `sessions`
@@ -541,22 +289,6 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 ('lQkVPalPnw2e2nXXT2erHkgBqOOQ0C9fcTew4GxS', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiS3BQa3JKdVFXbThHY2h0THZBdW9naUZnZmU0NlZ6aFdqYWRFODBTSiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzk6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyL2NhdGVnb3JpZXMvMyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1750879592);
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nom` varchar(255) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(255) NOT NULL DEFAULT 'user',
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `users`
