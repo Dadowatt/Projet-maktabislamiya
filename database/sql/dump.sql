@@ -24,7 +24,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- --------------------------------------------------------
 -- Déchargement des données de la table `users`
 --
-
+DELETE FROM `users`;
 INSERT INTO `users` (`id`, `nom`, `email`, `email_verified_at`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Dado', 'dado@gmail.com', NULL, '$2y$12$1hSek7Ub.xJlBDh0/wPageQqCkFQbWS1amj1d2NfnD3SdVyzjvYYO', 'admin', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
 (2, 'User', 'user@gmail.com', NULL, '$2y$12$T4Rh7ksemhRvmII8C.h1POxIt3X/lGm/zrzoMgnVxMU787sD2RT1S', 'user', NULL, '2025-05-30 18:48:41', '2025-05-30 18:48:41'),
@@ -34,7 +34,7 @@ INSERT INTO `users` (`id`, `nom`, `email`, `email_verified_at`, `password`, `rol
 --
 -- Déchargement des données de la table `auteurs`
 --
-
+DELETE FROM `auteurs`;
 INSERT INTO `auteurs` (`id`, `nom`, `photo`, `created_at`, `updated_at`) VALUES
 (1, 'Abd Al\'Azîz Ibn Bâz', 'auteurs/BhQTP5sDyZUuHQbVpU0TTVth3xOzqBIQTw6mGFzc.jpg', '2025-05-30 20:15:53', '2025-05-31 14:04:51'),
 (2, 'Abdou Errazzaq Al-Badr', 'auteurs/zcUKVszkCzJYVvttl5TkrJ1CHJ6UKo9aKK2Xt9n2.jpg', '2025-05-30 20:17:11', '2025-05-30 21:27:49'),
@@ -54,7 +54,7 @@ INSERT INTO `auteurs` (`id`, `nom`, `photo`, `created_at`, `updated_at`) VALUES
 --
 -- Déchargement des données de la table `auteur_suivis`
 --
-
+DELETE FROM `auteur_suivis`;
 INSERT INTO `auteur_suivis` (`id`, `user_id`, `auteur_id`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, NULL, NULL),
 (2, 2, 7, NULL, NULL),
